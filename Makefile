@@ -1,3 +1,4 @@
+all: figure.pdf figure.ps
 VERSION := $(shell git describe --tags)
 DIR     := $(shell basename $$PWD)
 
@@ -12,3 +13,9 @@ rog-latex-guide-for-author-$(VERSION).tar.gz: $(authordep)
 
 clean:
 	rm *.aux
+
+figure.pdf: figure.tex
+	pdflatex $<
+figure.ps: figure.tex
+	latex $<
+	dvips $(<:.tex=.dvi)
