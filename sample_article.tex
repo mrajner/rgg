@@ -1,5 +1,6 @@
-\documentclass{rog}
+\documentclass[review,startpage=111]{rog}
 
+\usepackage{blindtext}
 % 3. For the title and subtitles use type size 12 with Arial bold font.
 % 5. Capitalize the first word and all other principal words of the titles and subtitles.
 % 6. The titles should be centred, the subtitles initial caps left, numbering of subsections by decimal system, e.g. 1.1, 1.2, 1.3 etc.
@@ -22,14 +23,16 @@
     \maketitle
     The Author(s) are kindly requested to submit, with the manuscript, the names, and e-mail addresses of five potential reviewers. Note that the editor retains the sole right to decide whether or not the suggested reviewers are used. The names of potential reviewers should be entered in the section Comments for the Editor in the 1st step of online submission process.
     \cite{hw1997}
+
+    \blindtext[10]
+
+    
+  \section{figures}
+    \begin{figure}
+      \includegraphics[width=0.5\textwidth]{figure}
+      \caption{This is caption of figure}
+    \end{figure}
+
+  \section{tables}
+
 \end{document}
-
-use igs2ejournalguide.tex or igs2eanalsguide.tex as both a template and a guide when writing your paper
-submit your paper as a single pdf file in [review] mode
-provide a single figure file for figures with several panels (i.e. avoid the use of \stfloat, \subfloat, etc.)
-avoid the use of colour or shading in tables
-do not define new commands, macros or shortcuts
-strip out unnecessary comments not part of the paper itself (e.g. deleted sections, tables or figures, previous drafts)
-ensure references are in the correct/precise IGS journal format in terms of order, emphasis and punctuations and that they include doi numbers where available (see the LaTeX template/guide for details)
-
-
