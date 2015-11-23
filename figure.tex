@@ -1,0 +1,16 @@
+%% This file is dummy figure generator
+\documentclass{standalone}
+\usepackage{pgfplots}
+\begin{document}
+    \begin{tikzpicture}
+      \begin{axis}
+        [
+          domain=0:800,
+          smooth,
+          samples=100,
+        ]
+        \addplot[]{sin(x)};
+      \end{axis}
+    \end{tikzpicture}
+
+\end{document}

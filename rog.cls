@@ -1,4 +1,4 @@
-%% This file is class for submission
+%% This file is LaTeX class for submission
 %% to Reports on Geodesy and Geoinformatics
 %%
 %% this class follows author guidelines specified at
@@ -18,9 +18,30 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rog}[2015/11/16]
 
+\LoadClass[12pt,twoside]{article}
 %% use standard article rules by default
 %% with 12 point font size
-\LoadClass[12pt]{article}
+
+%% process class options
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+   family=rog,
+   prefix=rog@,
+}
+\DeclareStringOption[1]{startpage}
+\DeclareStringOption[]{volume}
+\DeclareStringOption[]{doi}
+\DeclareStringOption[]{year}
+\DeclareBoolOption{review}
+\ProcessKeyvalOptions*
+
+\setcounter{page}{\rog@startpage}
+
+\ifrog@review
+\RequirePackage{lineno}
+\linenumbers
+\linespread{2}
+\fi
 
 %% English language rules for all document
 \RequirePackage[english]{babel}
@@ -68,10 +89,10 @@
 
 %% maketitle command style
 \renewcommand\maketitle{
-  % title bold and centred
-  % \vspace*{2cm}
+  % title bold and centred and all in upper case
+  \vspace*{6em}
   \begin{center}
-    {\bfseries\MakeUppercase{\@title}}
+    {\bfseries\Large\MakeUppercase{\@title}\par}
   \end{center}
   % \vspace*{0.6cm}
   % \begin{center}
@@ -79,8 +100,10 @@
     % \vspace*{0.5cm}
     % {\@affiliation}
     % {\texttt{\@email}}
-  % \end{center}
+    % \end{center}
   % \vspace*{1.1 cm}
+  % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
+  % }
 }
 % \RequirePackage{natbib}
 %
@@ -98,50 +121,85 @@
 % % but change space width in comparison to original secdot.sty
 % \RequirePackage{secdot}
 % \renewcommand\sectiondot[1]{%
-%   \expandafter\def\csname @seccntfmt@#1\endcsname##1{%
-%     \csname the##1\endcsname.\enspace
-%   }
+    %   \expandafter\def\csname @seccntfmt@#1\endcsname##1{%
+    %     \csname the##1\endcsname.\enspace
+  %   }
 % }
 % \sectiondot{section}
-%
-% % affiliation environment
-% \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
-% \gdef\@affiliation{}
-% \newcommand\email[1]{\gdef\@email{#1}}
-% \gdef\@email{}
-%
-% % no additional space between bibliography entries
-% \setlength{\bibsep}{0.0pt}
-%
-% \parindent=0.6cm
-% \pagestyle{empty}
-%
+  %
+  % % affiliation environment
+  % \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
+  % \gdef\@affiliation{}
+  % \newcommand\email[1]{\gdef\@email{#1}}
+  % \gdef\@email{}
+  %
+  % % no additional space between bibliography entries
+  % \setlength{\bibsep}{0.0pt}
+  %
+  % \parindent=0.6cm
+  % \pagestyle{empty}
+  %
 
-%
-% % abstract and keywords commands
-% \renewcommand\abstract[1]{{\bf\noindent\uppercase{abstract}.\enspace}#1}
-% \newcommand\keywords[1]{\par\vspace{0.5em}\noindent {\bf Keywords: }#1}
-%
-% % redefinition of section and subsection environment
-% \renewcommand\section{%
-%  \@startsection {section}{1}{\z@}%
-%   {-1em \@plus -1ex \@minus -.2ex}%
-%   {0.5em \@plus.2ex}%
-%   {\normalfont\bfseries\uppercase}%
-% }
-% \renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
-%   {-0.6em \@plus -1ex \@minus -.2ex}%
-%   {0.3em \@plus.2ex}%
-%   {\normalfont\bfseries}%
-% }
-%
-% \endinput
-%
+  %
+  % % abstract and keywords commands
+  % \renewcommand\abstract[1]{{\bf\noindent\uppercase{abstract}.\enspace}#1}
+  % \newcommand\keywords[1]{\par\vspace{0.5em}\noindent {\bf Keywords: }#1}
+  %
+  % redefinition of section and subsection environment
+  \renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
+\renewcommand\section{%
+    \@startsection {section}{1}{\z@}%
+    {-1em \@plus -1ex \@minus -.2ex}%
+    {0.5em \@plus.2ex}%
+    {\normalfont\bfseries}%
+  }
+\renewcommand\subsection{\@startsection {subsection}{1}{\z@}%
+    {-0.6em \@plus -1ex \@minus -.2ex}%
+    {0.3em \@plus.2ex}%
+    {\normalfont\bfseries}%
+  }
 
-
-%% apply ``better'' microtypography
-\RequirePackage{microtype}
+  %
 
 
-%% Use the APA format as a style of citation and reference list (see Guidelines for APA Citation Style with examples)
-\bibliographystyle{apacite}
+  %% apply ``better'' microtypography
+  \RequirePackage{microtype}
+
+  %% Use the APA format as a style of citation and reference list (see Guidelines for APA Citation Style with examples)
+  \bibliographystyle{apacite}
+
+  %% include graphics
+  \RequirePackage{graphicx}
+
+  %% abstract and keywords
+
+  \newcommand\keywords[1]{\long\gdef\@keywords{#1}}
+  \gdef\@keywords{}
+  \renewenvironment{abstract}
+  {
+    \setlength{\leftmargin}{5em}%
+      \list{}{\setlength{\rightmargin}{\leftmargin}}%
+    \item\relax{\bfseries \abstractname}\newline
+      \itshape
+    }{\upshape\newline\vskip-0.5em
+      \textbf{Keywords:}
+      \@keywords
+    \endlist}
+
+  \RequirePackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhead{} % clear all header fields
+  \fancyhead[LO]{%
+    \textit{Reports on Geodesy and Geoinformatics}
+    vol.~\rog@volume/\rog@year%
+  }
+  \fancyhead[LE]{%
+    % \textit{Reports on Geodesy and Geoinformatics}
+    % vol.~\rog@volume/\rog@year%
+  }
+  \fancyhead[RO]{\textsc{doi:}\rog@doi}
+  \fancyfoot{} % clear all footer fields
+  \fancyfoot[CE,CO]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+\endinput
