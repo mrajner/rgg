@@ -5,4 +5,7 @@ inconsitent guide
    but in the example all words are capitalized
  
  * sample docx
+   caption of figure is not assaigned to figure
+
+ * opening on even and odd pages?
   
