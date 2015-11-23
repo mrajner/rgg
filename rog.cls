@@ -1,4 +1,4 @@
-%% This file is class for submission
+%% This file is LaTeX class for submission
 %% to Reports on Geodesy and Geoinformatics
 %%
 %% this class follows author guidelines specified at
