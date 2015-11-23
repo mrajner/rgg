@@ -18,9 +18,28 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rog}[2015/11/16]
 
+\LoadClass[12pt]{article}
 %% use standard article rules by default
 %% with 12 point font size
-\LoadClass[12pt]{article}
+
+%% process class options
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{
+   family=rog,
+   prefix=rog@,
+}
+\DeclareStringOption{startpage}
+\DeclareStringOption{volume}
+\DeclareStringOption{doi}
+\DeclareBoolOption{review}
+\ProcessKeyvalOptions*
+\setcounter{page}{\rog@startpage}
+
+\ifrog@review
+\RequirePackage{lineno}
+\linenumbers
+\linespread{2}
+\fi
 
 %% English language rules for all document
 \RequirePackage[english]{babel}
@@ -145,3 +164,5 @@
 
 %% Use the APA format as a style of citation and reference list (see Guidelines for APA Citation Style with examples)
 \bibliographystyle{apacite}
+
+\RequirePackage{graphicx}
