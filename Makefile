@@ -1,5 +1,8 @@
 all: package
-
+alles:
+	echo $(VERSION).$(COMMITS)
+all: figure.pdf figure.ps
+COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 VERSION := $(shell git describe --tags --abbrev=0)
 DIR     := $(shell basename $$PWD)
 
