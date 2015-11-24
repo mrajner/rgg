@@ -29,9 +29,9 @@
    prefix=rog@,
 }
 \DeclareStringOption[1]{startpage}
-\DeclareStringOption[]{volume}
-\DeclareStringOption[]{doi}
-\DeclareStringOption[]{year}
+\DeclareStringOption[xxx]{volume}
+\DeclareStringOption[xxx]{doi}
+\DeclareStringOption[xxxx]{year}
 \DeclareBoolOption{review}
 \ProcessKeyvalOptions*
 
@@ -95,12 +95,12 @@
     {\bfseries\Large\MakeUppercase{\@title}\par}
   \end{center}
   % \vspace*{0.6cm}
-  % \begin{center}
-    % {\@author}\\
+  \begin{center}
+    {\@author}\\
     % \vspace*{0.5cm}
-    % {\@affiliation}
+    {\@affiliation}
     % {\texttt{\@email}}
-    % \end{center}
+    \end{center}
   % \vspace*{1.1 cm}
   % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
   % }
@@ -128,10 +128,19 @@
 % \sectiondot{section}
   %
   % % affiliation environment
-  % \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
-  % \gdef\@affiliation{}
-  % \newcommand\email[1]{\gdef\@email{#1}}
-  % \gdef\@email{}
+  \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
+  \gdef\@affiliation{}
+  \newcommand\email[1]{\gdef\@email{#1}}
+  \gdef\@email{}
+\renewcommand\author{\@ifnextchar [{\@authortwo}{\@authorone}}
+\def\@authortwo[#1]#2{\gdef\@author{#2}\gdef\@shortauthor{#1}}
+\def\@authorone#1{\gdef\@author{#1}%
+ \begingroup\def\and{and}\gdef\@shortauthor{#1}\endgroup}
+\gdef\@author{\mbox{}}
+
+\newcommand\shortauthor[1]{\gdef\@shortauthor{#1}}
+\gdef\@shortauthor{}
+
   %
   % % no additional space between bibliography entries
   % \setlength{\bibsep}{0.0pt}
@@ -186,12 +195,13 @@
       \@keywords
     \endlist}
 
+  \RequirePackage{lastpage}
   \RequirePackage{fancyhdr}
   \pagestyle{fancy}
   \fancyhead{} % clear all header fields
   \fancyhead[LO]{%
     \textit{Reports on Geodesy and Geoinformatics}
-    vol.~\rog@volume/\rog@year%
+    vol.\,\rog@volume/\rog@year; pages \rog@startpage-\pageref{LastPage}%
   }
   \fancyhead[LE]{%
     % \textit{Reports on Geodesy and Geoinformatics}

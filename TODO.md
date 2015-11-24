@@ -8,4 +8,10 @@ inconsitent guide
    caption of figure is not assaigned to figure
 
  * opening on even and odd pages?
+
+ * file sample.docx gives author footnotes at the and of affiliation
+   but papers accepted show different convention
+
+ * file sample.docx gives author surname in uppercase
+   not found in articles
   
