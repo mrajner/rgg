@@ -1,18 +1,20 @@
 alles:
 	echo $(VERSION).$(COMMITS)
 all: figure.pdf figure.ps
-VERSION := $(shell git describe --tags)
 COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
+VERSION := $(shell git describe --tags --abbrev=0)
 DIR     := $(shell basename $$PWD)
 
-authordep = rog.cls sample_article.bib sample_article.tex
-editordep = rog.cls sample_article.bib sample_article.tex master.tex
+authordep := rog.cls sample_article.bib sample_article.tex
+editordep := $(authordep) master.tex
+
+package: rog-latex-guide-for-author-$(VERSION).tar.gz rog-latex-guide-for-editor-$(VERSION).tar.gz
 
 rog-latex-guide-for-author-$(VERSION).tar.gz: $(authordep)
-	echo $(VERSION) $(DIR)
-	tar czvf $@ \
-    -C ../   \
-    $(addprefix $(DIR)/,$(authordep))
+	tar czvf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
+
+rog-latex-guide-for-editor-$(VERSION).tar.gz: $(editordep)
+	tar czvf $@ -C ../  $(addprefix $(DIR)/,$(editordep))
 
 clean:
 	rm *.aux
