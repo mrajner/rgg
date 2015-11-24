@@ -1,5 +1,8 @@
+alles:
+	echo $(VERSION).$(COMMITS)
 all: figure.pdf figure.ps
 VERSION := $(shell git describe --tags)
+COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
 
 authordep = rog.cls sample_article.bib sample_article.tex
