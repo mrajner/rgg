@@ -1,6 +1,5 @@
-\documentclass[review]{rog}
+\documentclass{rog}
 
-\usepackage{blindtext}
 % 3. For the title and subtitles use type size 12 with Arial bold font.
 % 5. Capitalize the first word and all other principal words of the titles and subtitles.
 % 6. The titles should be centred, the subtitles initial caps left, numbering of subsections by decimal system, e.g. 1.1, 1.2, 1.3 etc.
@@ -19,14 +18,12 @@
 % 16. The paper (with main text, abstract and keywords) should be submitted via web page.
 
 \title{The sample paper and guidelines for using \LaTeX{} class for submission to Reports on Geodesy and Geoinformatics}
-% \author[Smith, J., White, J.]{John Smith$^1$, Jerry White$^2$}
-\author{John Smith$^1$, Jerry White$^2$}
-
+\author[Smith, J., White, J.]{John Smith$^1$, Jerry White$^2$}
+\affiliation{1}
 
 \begin{document}
 
     \maketitle
-
 
     \begin{abstract}
       These paper give you template for preparing article for ``Reports on 
@@ -36,28 +33,43 @@
       \keywords{insert 3 – 4 keywords or phrases}
     \end{abstract}
 
-    The Author(s) are kindly requested to submit, with the manuscript, 
-    the names, and e-mail addresses of five potential reviewers. Note 
-    that the editor retains the sole right to decide whether or not the 
-    suggested reviewers are used. The names of potential reviewers should 
-    be entered in the section Comments for the Editor in the 1st step of 
-    online submission process.
-    \cite{hw1997}
-
-    \blindtext[10]
 
   \section{Main structure}
-    To start new section type 
+    \label{labelforsection}
+    For sectioning use standard \LaTeX{} commands
+    \verb$\section$ and \verb$\subsection$.
+    All numbering will be added automatically.
+    To refer to section or subsection number
+    simply use \verb$\label$ just after the section
+    name and then you can freely refer to it in subsequent text
+    using \verb$\ref$ and label name.
+    Just like here for section~\ref{labelforsection} or
+    subsection~\ref{labelforsubsection}.
+
   \subsection{Subsectioning}
-    To start new section type 
+    \label{labelforsubsection}
+    This dummy subsection shows how to use subsections in document.
 
   \section{figures}
-    \begin{figure}
+    You should not worry about figure placement.
+    Just wrap your graphics in \texttt{figure}
+    environment.
+  \begin{figure}
       \includegraphics[width=0.5\textwidth]{figure}
       \caption{This is caption of figure}
     \end{figure}
 
   \section{tables}
+    \begin{table}
+      \caption{Sample table}
+    \begin{tabular}{ccr}
+      \toprule
+      header1 & header2 & header3 \\
+      \midrule
+      first row & second column & last column\\
+      \bottomrule
+    \end{tabular}
+  \end{table}
 
   \section{Equations}
     Using and referencing equations 
@@ -68,25 +80,24 @@
     \end{equation}
 
     
+  \section{Closing remarks}
+    The Author(s) are kindly requested to submit, with the manuscript, 
+    the names, and e-mail addresses of five potential reviewers. Note 
+    that the editor retains the sole right to decide whether or not the 
+    suggested reviewers are used. The names of potential reviewers should 
+    be entered in the section Comments for the Editor in the 1st step of 
+    online submission process.
+
+    \acknowledgement{
+      Please insert your acknowledgement in 
+      \verb$\acknowledgement$ command 
+    }
 
 \end{document}
 
-
-John SMITH(1), Jerry WHITE(2)
-
-Please insert the author affiliation, Institution, City, Country (1)
-Department of Geodesy and Cartography, Warsaw University of Technology
-Warsaw, Poland (2)
-
-
-1. Introduction 
-
-To prepare the paper for “Reports on Geodesy and Geoinformatics” use editor MS Word for Windows. Use font Arial for the whole text. For the title and subtitles use type size 12 with Arial bold font. For the text use the font size of 12 points. Capitalize the first word and all other principal words of the titles and subtitles. The titles should be centered, the subtitles initial caps left, numbering of subsections by decimal system, e.g. 1.1, 1.2, 1.3 etc. 
-The paper should be prepared using A4 paper format with the following margins: upper, left and right and bottom margins to be set at 2.5 cm.
-
-2. Figures, equations and tables 
-
-The figures and subscriptions should be numbered below the figures and centred, e.g. >"Fig. 1. Text"< (align to the left of figure, use the font size of 11 points). 
+The figures and subscriptions should be numbered below the figures and centred, 
+e.g. >"Fig. 1. Text"< (align to the left of figure, use the font size of 11 
+  points). 
 
 
 
@@ -134,12 +145,10 @@ Table 1. Title of table
 
 
 
-3. Conclusions 
-
-These paper presents example for preparing article for “Reports on Geodesy and Geoinformatics”. We require APA Citation Style. You can find more informations about APA Citation Style in internet pages: www.rog.gik.pw.edu.pl.
+These paper presents example for preparing article for “Reports on 
+Geodesy and Geoinformatics”. We require APA Citation Style. You can find 
 
 Acknowledgement
-Please insert acknowledgement using type Arial size 11 points.
 
 References 
 

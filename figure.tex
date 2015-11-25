@@ -1,13 +1,17 @@
 %% This file is dummy figure generator
 \documentclass{standalone}
+\usepackage{sansmath}
+\sansmath
 \usepackage{pgfplots}
 \begin{document}
     \begin{tikzpicture}
       \begin{axis}
         [
-          domain=0:800,
+          height  = 6cm,
+          width   = 10cm,
+          domain  = 0:800,
           smooth,
-          samples=100,
+          samples = 100,
         ]
         \addplot[]{sin(x)};
       \end{axis}
