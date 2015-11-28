@@ -109,6 +109,7 @@
   % \vspace*{1.1 cm}
   % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
   % }
+    \suppressfloats
 }
 % \RequirePackage{natbib}
 %
@@ -132,16 +133,25 @@
 %% affiliation environment
 \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
 \gdef\@affiliation{}
+
+%% email
 \newcommand\email[1]{\gdef\@email{#1}}
 \gdef\@email{}
+
+%% author and short version of atuhor to running header
 \renewcommand\author{\@ifnextchar [{\@authortwo}{\@authorone}}%}
 \def\@authortwo[#1]#2{\gdef\@author{#2}\gdef\@shortauthor{#1}}
 \def\@authorone#1{\gdef\@author{#1}%}
 \begingroup\def\and{and}\gdef\@shortauthor{#1}\endgroup}
 \gdef\@author{\mbox{}}
 
-\newcommand\shortauthor[1]{\gdef\@shortauthor{#1}}
-\gdef\@shortauthor{}
+%% same for title
+\renewcommand\title{\@ifnextchar [{\@titletwo}{\@titleone}}%}
+\def\@titletwo[#1]#2{\gdef\@title{#2}\gdef\@shorttitle{#1}}
+\def\@titleone#1{\gdef\@title{#1}%}
+\begingroup\def\and{and}\gdef\@shorttitle{#1}\endgroup}
+\gdef\@title{\mbox{}}
+
 
 %
 % % no additional space between bibliography entries
@@ -210,7 +220,6 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
-\RequirePackage{changepage}
 \def\headerfirstpage{%
   \textit{Reports on Geodesy and Geoinformatics}
   vol.\,\rog@volume/\rog@year; pages \rog@startpage-\pageref{LastPage}%
@@ -223,11 +232,14 @@
 \gdef\@acknowledgement{}
 
 %%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
+% \RequirePackage{changepage}
 % \strictpagecheck
 % \checkoddpage
 % \ifoddpage
 \fancyhead[LO]{\headerfirstpage}
 \fancyhead[RO]{\doi}
+\fancyhead[LE]{\textit{\@shortauthor:\ \@shorttitle}}
+\fancyhead[RE]{}
 % \else
 % \fancyhead[LO]{\headerfirstpage}
 % \fancyhead[RO]{\doi}

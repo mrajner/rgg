@@ -17,7 +17,7 @@
 % 15. The address for correspondence, e.g. name with title, address of the institution,should be included at the end of the article. The electronic mail address of all Authors is indispensable for sending a proof and final pdf file.
 % 16. The paper (with main text, abstract and keywords) should be submitted via web page.
 
-\title{The sample paper and guidelines for using \LaTeX{} class for submission to Reports on Geodesy and Geoinformatics}
+\title[The sample paper\ldots]{The sample paper and guidelines for using \LaTeX{} class for submission to Reports on Geodesy and Geoinformatics}
 \author[Smith, J., White, J.]{John Smith$^1$, Jerry White$^2$}
 \affiliation{1}
 
@@ -50,10 +50,12 @@
     \label{labelforsubsection}
     This dummy subsection shows how to use subsections in document.
 
-  \section{figures}
+  \section{Figures}
     You should not worry about figure placement.
     Just wrap your graphics in \texttt{figure}
-    environment.
+    environment and use standard \texttt{caption}
+    command as in example below.
+    To refer to this figure
   \begin{figure}
       \includegraphics[width=0.5\textwidth]{figure}
       \caption{This is caption of figure}
@@ -92,6 +94,8 @@
       Please insert your acknowledgement in 
       \verb$\acknowledgement$ command 
     }
+
+    \verbatiminput{./rog.cls}
 
 \end{document}
 
