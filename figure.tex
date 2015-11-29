@@ -3,17 +3,28 @@
 \usepackage{sansmath}
 \sansmath
 \usepackage{pgfplots}
+\usepackage{siunitx}
+\usepgfplotslibrary{units}
+\pgfplotsset{
+every axis label/.append style={font=\sffamily},
+tick label style={font=\sffamily},
+}
 \begin{document}
     \begin{tikzpicture}
       \begin{axis}
         [
-          height  = 6cm,
+          height  = 4cm,
           width   = 10cm,
           domain  = 0:800,
+          grid,
           smooth,
           samples = 100,
+          xlabel  = {time},
+          x unit  = {\sec},
+          ylabel  = {g},
+          y unit  = {\mu Gal}
         ]
-        \addplot[]{sin(x)};
+        \addplot[]{sin(x) + 2 * cos(2*x-40)};
       \end{axis}
     \end{tikzpicture}
 

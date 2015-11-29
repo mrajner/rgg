@@ -8,7 +8,7 @@ inconsitent guide
    caption of figure is not assaigned to figure
 
  * opening on even and odd pages?
-   (rog class will determine if title is on even or odd page but this should(?) be changed)
+   (rgg class will determine if title is on even or odd page but this should(?) be changed)
 
  * file sample.docx gives author footnotes at the and of affiliation
    but papers accepted show different convention

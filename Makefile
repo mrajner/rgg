@@ -2,16 +2,16 @@ VERSION := $(shell git describe --tags --abbrev=0)
 COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
 
-all: package
+all: package rgg_editor.pdf
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
-authordep := rgg.cls sample_article.bib sample_article.tex sample_article.pdf
+authordep := rgg.cls rgg_sample_article.bib rgg_sample_article.tex rgg_sample_article.pdf
 editordep := $(authordep) master.tex master.pdf
 
 package: rgg-latex-guide-for-author.tar.gz
 
 rgg-latex-guide-for-author.tar.gz: rgg-latex-guide-for-author-$(VERSION).tar.gz
-	ln -s $< $@
+	ln -sf $< $@
 rgg-latex-guide-for-author-$(VERSION).tar.gz: $(authordep)
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
 

@@ -15,15 +15,17 @@
 %% or you need any fancy setting which cannot be achieved
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
-
 %% created 20151116 Marcin Rajner
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rgg}[2015/11/16]
 
-\LoadClass[12pt,twoside]{article}
 %% use standard article rules by default
 %% with 12 point font size
+\LoadClass[12pt,twoside]{article}
+
+%% English language rules for all document
+\RequirePackage[english]{babel}
 
 %% process class options
 \RequirePackage{kvoptions}
@@ -46,8 +48,6 @@
 \linespread{2}
 \fi
 
-%% English language rules for all document
-\RequirePackage[english]{babel}
 
 %% use a4 paper size with all margins set to 2.5 cm
 \RequirePackage
@@ -89,10 +89,11 @@
 
 %% use sans-serif font for whole document
 \renewcommand{\familydefault}{\sfdefault}
+\RequirePackage{sansmath}\sansmath
 
 %% maketitle command style
 \renewcommand\maketitle{
-  % title bold and centred and all in upper case
+  %% title bold and centred and all in upper case
   \vspace*{6em}
     \parbox{14cm}{
   \begin{center}
@@ -102,7 +103,7 @@
   % \vspace*{0.6cm}
   \begin{center}
     {\bfseries\@author}\\
-    % \vspace*{0.5cm}
+    \vspace*{0.5em}
     {\@affiliation}
     \end{center}
   % \vspace*{1.1 cm}
@@ -116,21 +117,27 @@
 \floatsetup[table]{
   capposition=top,
 }
-% \floatsetup[figure]{
-% }
 
-%
-%% float environments
-%% center figures
-% \g@addto@macro\@floatboxreset{\centering}
-% \renewcommand\figurename{Fig.}
-% \renewcommand\tablename{Tab.}
+\RequirePackage{caption}
+\captionsetup
+{
+  labelsep=period,
+  labelfont={bf,small},
+  % labelfont=small,
+}
+\captionsetup[figure]{
+  name=Fig.,
+}
+\captionsetup[table]{
+  name=Tab.,
+}
 
 \RequirePackage{booktabs}
 
 %% affiliation environment
 \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
 \gdef\@affiliation{}
+\newcommand{\nextaffiliation}{\leavevmode\vskip0.5em}
 
 %% author and short version of atuhor to running header
 \renewcommand\author{\@ifnextchar [{\@authortwo}{\@authorone}}%}
@@ -146,20 +153,6 @@
 \begingroup\def\and{and}\gdef\@shorttitle{#1}\endgroup}
 \gdef\@title{\mbox{}}
 
-
-%
-% % no additional space between bibliography entries
-% \setlength{\bibsep}{0.0pt}
-%
-% \parindent=0.6cm
-% \pagestyle{empty}
-%
-
-%
-% % abstract and keywords commands
-% \renewcommand\abstract[1]{{\bf\noindent\uppercase{abstract}.\enspace}#1}
-% \newcommand\keywords[1]{\par\vspace{0.5em}\noindent {\bf Keywords: }#1}
-%
 % redefinition of section and subsection environment
 \renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
 \renewcommand\section{%
@@ -210,7 +203,7 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyfoot[C]{\thepage}
+\fancyfoot[C]{\small\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
@@ -218,7 +211,7 @@
   \textit{Reports on Geodesy and Geoinformatics}
   vol.\,\rgg@volume/\rgg@year; pages \rgg@startpage-\pageref{LastPage}%
 }
-\def\doi{\textsc{doi:}\rgg@doi}
+\def\doiheader{\textsc{doi:}\rgg@doi}
 
 
 %% acknowledgement
@@ -228,7 +221,7 @@
 }
 
 %% email
-\RequirePackage{hyperref}
+\RequirePackage[hidelinks]{hyperref}
 \newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
 \RequirePackage{array}
 
@@ -249,16 +242,24 @@
 % \strictpagecheck
 % \checkoddpage
 % \ifoddpage
-\fancyhead[LO]{\headerfirstpage}
-\fancyhead[RO]{\doi}
-\fancyhead[LE]{\textit{\@shortauthor:\ \@shorttitle}}
+\fancyhead[LO]{\small\headerfirstpage}
+\fancyhead[RO]{\small\doiheader}
+\fancyhead[LE]{\textit{\small\@shortauthor:\ \@shorttitle}}
 \fancyhead[RE]{}
 % \else
 % \fancyhead[LO]{\headerfirstpage}
-% \fancyhead[RO]{\doi}
+% \fancyhead[RO]{\doiheader}
 % \fi
 
-\RequirePackage{sansmath}
-\sansmath
+
+%% Bibliography
+%% clickable doi
+\RequirePackage{doi}\renewcommand{\doitext}{}
+
+%% force using apa style for bibliography
+\RequirePackage[apaciteclassic]{apacite}
+
+%% but use rgg appropriate bibitem spacing
+\setlength{\bibitemsep}{\baselineskip}
 
 \endinput
