@@ -19,7 +19,7 @@
 %% created 20151116 Marcin Rajner
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rog}[2015/11/16]
+\ProvidesClass{rgg}[2015/11/16]
 
 \LoadClass[12pt,twoside]{article}
 %% use standard article rules by default
@@ -28,8 +28,8 @@
 %% process class options
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
-   family=rog,
-   prefix=rog@,
+   family=rgg,
+   prefix=rgg@,
 }
 \DeclareStringOption[1]{startpage}
 \DeclareStringOption[]{volume}
@@ -38,9 +38,9 @@
 \DeclareBoolOption{review}
 \ProcessKeyvalOptions*
 
-\setcounter{page}{\rog@startpage}
+\setcounter{page}{\rgg@startpage}
 
-\ifrog@review
+\ifrgg@review
 \RequirePackage{lineno}
 \linenumbers
 \linespread{2}
@@ -101,10 +101,9 @@
   }
   % \vspace*{0.6cm}
   \begin{center}
-    {\@author}\\
+    {\bfseries\@author}\\
     % \vspace*{0.5cm}
     {\@affiliation}
-    % {\texttt{\@email}}
     \end{center}
   % \vspace*{1.1 cm}
   % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
@@ -129,14 +128,9 @@
 
 \RequirePackage{booktabs}
 
-
 %% affiliation environment
 \newcommand\affiliation[1]{\gdef\@affiliation{#1}}
 \gdef\@affiliation{}
-
-%% email
-\newcommand\email[1]{\gdef\@email{#1}}
-\gdef\@email{}
 
 %% author and short version of atuhor to running header
 \renewcommand\author{\@ifnextchar [{\@authortwo}{\@authorone}}%}
@@ -186,7 +180,7 @@
 %% apply ``better'' microtypography
 \RequirePackage{microtype}
 
-%% enhance math
+%% enhance math mode
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
@@ -222,14 +216,33 @@
 
 \def\headerfirstpage{%
   \textit{Reports on Geodesy and Geoinformatics}
-  vol.\,\rog@volume/\rog@year; pages \rog@startpage-\pageref{LastPage}%
+  vol.\,\rgg@volume/\rgg@year; pages \rgg@startpage-\pageref{LastPage}%
 }
-\def\doi{\textsc{doi:}\rog@doi}
+\def\doi{\textsc{doi:}\rgg@doi}
 
 
 %% acknowledgement
-\newcommand\acknowledgement[1]{\gdef\@acknowledgement{#1}}
-\gdef\@acknowledgement{}
+\newcommand\acknowledgement[1]{%
+\section*{Acknowledgement}
+  {\small#1}%
+}
+
+%% email
+\RequirePackage{hyperref}
+\newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
+\RequirePackage{array}
+
+%% authornote
+\newcommand{\authornote}[1]{%
+  \vskip2em
+  \noindent\rule{0.5\textwidth}{0.4pt}\\
+    \let\\\newline
+  \begin{tabular}
+    {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
+          \textbf{Authors:} 
+          & \let\\\newline #1
+  \end{tabular}
+}
 
 %%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
 % \RequirePackage{changepage}

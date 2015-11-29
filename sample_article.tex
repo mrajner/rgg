@@ -1,4 +1,10 @@
-\documentclass{rog}
+\documentclass{rgg}
+\flushbottom
+
+%% this package is included in this example only to list
+%% the source code at the end of this example
+%% the authors can remove this declaration
+\usepackage{verbatim}
 
 % 3. For the title and subtitles use type size 12 with Arial bold font.
 % 5. Capitalize the first word and all other principal words of the titles and subtitles.
@@ -18,8 +24,9 @@
 % 16. The paper (with main text, abstract and keywords) should be submitted via web page.
 
 \title[The sample paper\ldots]{The sample paper and guidelines for using \LaTeX{} class for submission to Reports on Geodesy and Geoinformatics}
-\author[Smith, J., White, J.]{John Smith$^1$, Jerry White$^2$}
-\affiliation{1}
+\author[Smith, J., White, J.]{John Smith$^{1,2}$, Jerry White$^2$}
+\affiliation{1 Department of Very Important Issues}
+
 
 \begin{document}
 
@@ -33,55 +40,120 @@
       \keywords{insert 3 – 4 keywords or phrases}
     \end{abstract}
 
+  \section{General information}
+    Use \texttt{rgg} LaTeX class for article preparation.
+    Make sure that \texttt{rgg.cls} is assesible in your
+    \texttt{TEXPATH} variable or this class file can be put
+    in your working directory with other \texttt{.tex} file(s).
 
+    Using external packages and user defined commands is allowed
+    but do not change the formatting settings.
+    Remember to send all your files (except \texttt{rgg.cls}) 
+    with all your settings and inputs.
+    
+    
   \section{Main structure}
     \label{labelforsection}
+
+    Following sections gives the basic rules for formatting your
+    paper.
+
+  \subsection{Title, author info and abstract}
+    Use \texttt{title}, \texttt{author} 
+    and \texttt{affiliation} command
+    to define your title page. This can be done
+    in your preamble or at the beginning of the document.
+    To make titling visible use \texttt{maketitle} command.
+
+    Optionally specify short version of author(s) and title information
+    for running header (again example within this file in the square brackets).
+
+    Put appropriate reference number near each author in superscript
+    and refer this number in special \texttt{affiliation} command.
+    If all authors has the same affiliation you can skip superscripts.
+    
+    Please put short note about author(s)
+    in \texttt{authornote} command 
+    at the end of article with short information about
+    contributors.
+
+
+  \subsection{Sectioning}
+    \label{labelforsubsection}
     For sectioning use standard \LaTeX{} commands
-    \verb$\section$ and \verb$\subsection$.
+    \texttt{section} and \texttt{subsection}.
     All numbering will be added automatically.
     To refer to section or subsection number
-    simply use \verb$\label$ just after the section
+    simply use \texttt{label} just after the section
     name and then you can freely refer to it in subsequent text
-    using \verb$\ref$ and label name.
+    using \texttt{ref} and label name.
     Just like here for section~\ref{labelforsection} or
     subsection~\ref{labelforsubsection}.
+    Do not go to deep \emph{i.e.} try to avoid
+    \texttt{subsubsection}s. 
 
-  \subsection{Subsectioning}
-    \label{labelforsubsection}
-    This dummy subsection shows how to use subsections in document.
 
-  \section{Figures}
+  \subsection{Figures}
     You should not worry about figure placement.
     Just wrap your graphics in \texttt{figure}
     environment and use standard \texttt{caption}
     command as in example below.
     To refer to this figure
-  \begin{figure}
-      \includegraphics[width=0.5\textwidth]{figure}
-      \caption{This is caption of figure}
+    \begin{figure}
+      \includegraphics{figure}
+      \caption{This is caption of Figure~\ref{figurecaption}}
+      \label{figurecaption}
     \end{figure}
 
-  \section{tables}
-    \begin{table}
-      \caption{Sample table}
-    \begin{tabular}{ccr}
-      \toprule
-      header1 & header2 & header3 \\
-      \midrule
-      first row & second column & last column\\
-      \bottomrule
-    \end{tabular}
-  \end{table}
+  \subsection{Tables}
+    Put your table definition in 
+    \texttt{table} environment and give appropriate caption.
+    All formatting and numbering will be set automatically.
+    The \texttt{tabular} environment is wrapped into 
+    \texttt{table} environment hence it is floating object.
+    If your table needs to be putted at specific place
+    do not omit \texttt{table} environment but put
+    optional \texttt{[H]} specifier.
+
+    \begin{table}[H]
+      \caption{Sample table which shows within text}
+      \label{labelforheretable}
+      \begin{tabular}{ccc}
+        \toprule
+        header1 & header2 & header3 \\
+        \midrule
+        first row  & second column & last column \\
+        second row & second column & last column \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \begin{table}[b]
+      \caption{Sample floating table}
+      \label{labelforgloatingtable}
+      \begin{tabular}{@{}lll@{}}
+        \toprule
+        header1 & header2 & header3 \\
+        \midrule
+        first row  & second column & last column \\
+        second row & second column & last column \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
 
   \section{Equations}
     Using and referencing equations 
     is given with standard \LaTeX{} macros.
-    To use
     \begin{equation}
-      dfsf
+      \frac{1}{m\cdot c^2} = \frac{1}{E}
+      \label{equationlabel}
     \end{equation}
+    This equation will be numbered properly and you
+    can refer to them with appropriate
+    \texttt{label} and \texttt{ref} command.
+    Just like here in Eq.~\ref{equationlabel}.
 
-    
+
   \section{Closing remarks}
     The Author(s) are kindly requested to submit, with the manuscript, 
     the names, and e-mail addresses of five potential reviewers. Note 
@@ -90,12 +162,31 @@
     be entered in the section Comments for the Editor in the 1st step of 
     online submission process.
 
+    The editors reserve the right to modify 
+    your source files to adapt it to journal
+    requirements.
+
     \acknowledgement{
-      Please insert your acknowledgement in 
-      \verb$\acknowledgement$ command 
+      If you would like to use any acknowledgement 
+      please insert it into
+      \texttt{acknowledgement} command.
     }
 
-    \verbatiminput{./rog.cls}
+    References 
+
+    \authornote{%
+      Professor John Smith \email{johnsmith@xxx.com}\\
+      PhD Jerry White \email{jerry@yyy.pl}
+    }
+    
+
+%% this last part is just inclusion of source file 
+%% only for documentation purposes
+\clearpage
+  \section*{Appendix}
+  \subsection*{Listing of \texttt{sample\_paper.tex} file (source of this document)}
+    \scriptsize
+    \verbatiminput{./sample_article.tex}
 
 \end{document}
 
@@ -103,65 +194,9 @@ The figures and subscriptions should be numbered below the figures and centred,
 e.g. >"Fig. 1. Text"< (align to the left of figure, use the font size of 11 
   points). 
 
-
-
 Fig. 1. Title of figure
-
-For equations it is recommended to use standard equation editor existing in Word editor. We accept insertion of the equations into tables. Insert the equation number on the right side. See example:
-
-
-(1)
 
 The tables should be numbered on the top of the table and centred, e.g. >"Table 1. Text< (align to the left of table, use the font size of 11 points).
 
 Table 1. Title of table
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-These paper presents example for preparing article for “Reports on 
-Geodesy and Geoinformatics”. We require APA Citation Style. You can find 
-
-Acknowledgement
-
-References 
-
-Neitzel, F. (2010). Generalization of total least-squares on example of unweighted and weighted 2D similarity transformation. Journal of Geodesy, 84(12), 751-762. doi:10.1007/s00190-010-0408-0
-
-Teunissen, P. J. G., & de Bakker, P. F. (2013). Single-receiver single-channel multi-frequency GNSS integrity: outliers, slips, and ionospheric disturbances. Journal of Geodesy, 87(2), 161-177. doi:10.1007/s00190-012-0588-x
-
-Knight, N. L., Wang, J., & Rizos, C. (2010). Generalised measures of reliability for multiple outliers. Journal of Geodesy, 84(10), 625-635. doi:10.1007/s00190-010-0392-4
-
-
-Authors: Short information about authors: name with title, address of the institution, email address.
 
