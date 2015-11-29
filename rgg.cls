@@ -196,6 +196,7 @@
   }{\upshape\newline\vskip-0.5em
     \textbf{Keywords:}
     \@keywords
+    \vspace{0.6em}
   \endlist}
 
 \RequirePackage{lastpage}
