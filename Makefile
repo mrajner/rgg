@@ -10,9 +10,9 @@ editordep := $(authordep) master.tex master.pdf
 
 package: rgg-latex-guide-for-author.tar.gz
 
-rgg-latex-guide-for-author.tar.gz: rgg-latex-guide-for-author-$(VERSION).tar.gz
+rgg-latex-guide-for-author.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
-rgg-latex-guide-for-author-$(VERSION).tar.gz: $(authordep)
+rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep)
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
 
 clean:
