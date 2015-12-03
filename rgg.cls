@@ -54,6 +54,8 @@
 [
   a4paper,
   margin = 2.5cm,
+  % includehead,
+  headheight=0cm,
 ]
 {geometry}
 
@@ -94,25 +96,27 @@
 %% maketitle command style
 \renewcommand\maketitle{
   %% title bold and centred and all in upper case
-  \vspace*{6em}
-    \parbox{14cm}{
-  \begin{center}
-    {\bfseries\large\MakeUppercase{\@title}\par}
-  \end{center}
+  % \thispagestyle{plain}
+  \par
+  \vskip6em
+  \parbox{14cm}{
+    \begin{center}
+      {\bfseries\large\MakeUppercase{\@title}\par}
+    \end{center}
   }
   % \vspace*{0.6cm}
   \begin{center}
     {\bfseries\@author}\\
     \vspace*{0.5em}
     {\@affiliation}
-    \end{center}
+  \end{center}
   % \vspace*{1.1 cm}
   % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
   % }
-    \suppressfloats
+\suppressfloats
 }
-% \RequirePackage{natbib}
-%
+
+%% float environments
 \RequirePackage{floatrow}
 \floatsetup[table]{
   capposition=top,
@@ -123,7 +127,6 @@
 {
   labelsep=period,
   labelfont={bf,small},
-  % labelfont=small,
 }
 \captionsetup[figure]{
   name=Fig.,
@@ -230,11 +233,11 @@
 \newcommand{\authornote}[1]{%
   \vskip2em
   \noindent\rule{0.5\textwidth}{0.4pt}\\
-    \let\\\newline
+  \let\\\newline
   \begin{tabular}
     {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
-          \textbf{Authors:} 
-          & \let\\\newline #1
+    \textbf{Authors:} 
+    & \let\\\newline #1
   \end{tabular}
 }
 
@@ -243,14 +246,37 @@
 % \strictpagecheck
 % \checkoddpage
 % \ifoddpage
+
+%% add logo to title page
+\AtBeginDocument{%
+  \thispagestyle{plain}%
+  \noindent\parbox[t]{\textwidth}{%
+    \includegraphics[width=2cm]{logo_dg}}
+  % \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
+  % \kern \medskipamount
+  % \hrule height 0.4pt
+  \par
+  \kern 2pt
+  \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
+  \kern 2pt
+  \hrule height 0.4pt
+}
+
 \fancyhead[LO]{\small\headerfirstpage}
 \fancyhead[RO]{\small\doiheader}
 \fancyhead[LE]{\textit{\small\@shortauthor:\ \@shorttitle}}
 \fancyhead[RE]{}
+
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhead{}
+}
+
+
 % \else
-% \fancyhead[LO]{\headerfirstpage}
-% \fancyhead[RO]{\doiheader}
-% \fi
+  % \fancyhead[LO]{\headerfirstpage}
+  % \fancyhead[RO]{\doiheader}
+  % \fi
 
 
 %% Bibliography
