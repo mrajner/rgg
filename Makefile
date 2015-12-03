@@ -38,6 +38,6 @@ test:
 		&& tar zxvf rgg-latex-guide-for-author.tar.gz                        \
 		&& cd rgg                                                            \
 		&& pdflatex rgg_sample_article                                       \
-		&& cp ../../rgg_editor.tex .                                         \
+		&& wget www.grat.gik.pw.edu.pl/rgg/rgg_editor.tex                    \
 		&& pdflatex rgg_editor                                               \
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
