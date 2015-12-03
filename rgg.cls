@@ -38,6 +38,7 @@
 \DeclareStringOption[]{doi}
 \DeclareStringOption[year]{year}
 \DeclareBoolOption{review}
+\DeclareBoolOption[false]{logodg}
 \ProcessKeyvalOptions*
 
 \setcounter{page}{\rgg@startpage}
@@ -246,15 +247,17 @@
 \AtBeginDocument{%
   \thispagestyle{plain}%
   \noindent\parbox[t]{\textwidth}{%
+    \ifrgg@logodg
     \IfFileExists{logo_dg.png}{%
       \includegraphics[height=1.3cm]{logo_dg}}
     {\vskip1.3cm}
-  }
-  \par
-  \kern 2pt
-  \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
-  \kern 2pt
-  \hrule height 0.4pt
+  \fi
+}
+\par
+\kern 2pt
+\hbox to \textwidth{\headerfirstpage\hfill\doiheader}
+\kern 2pt
+\hrule height 0.4pt
 }
 
 \fancyhead[LO]{\small\headerfirstpage}

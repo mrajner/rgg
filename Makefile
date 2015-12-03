@@ -29,3 +29,15 @@ figure.ps: figure.tex
 
 %.pdf: %.tex figure.pdf
 	latexmk $< > /dev/null
+
+test:
+	rm -rf tmp
+	mkdir tmp
+	cd tmp                                                                \
+		&& wget www.grat.gik.pw.edu.pl/rgg/rgg-latex-guide-for-author.tar.gz \
+		&& tar zxvf rgg-latex-guide-for-author.tar.gz                        \
+		&& cd rgg                                                            \
+		&& pdflatex rgg_sample_article                                       \
+		&& cp ../../rgg_editor.tex .                                         \
+		&& pdflatex rgg_editor                                               \
+		&& zathura rgg_sample_article.pdf rgg_editor.pdf
