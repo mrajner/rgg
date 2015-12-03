@@ -48,7 +48,6 @@
 \linespread{2}
 \fi
 
-
 %% use a4 paper size with all margins set to 2.5 cm
 \RequirePackage
 [
@@ -170,9 +169,6 @@
     {\normalfont\bfseries}%
   }%}
 
-%
-
-
 %% apply ``better'' microtypography
 \RequirePackage{microtype}
 
@@ -217,7 +213,6 @@
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
-
 %% acknowledgement
 \newcommand\acknowledgement[1]{%
 \section*{Acknowledgement}
@@ -251,10 +246,10 @@
 \AtBeginDocument{%
   \thispagestyle{plain}%
   \noindent\parbox[t]{\textwidth}{%
-    \includegraphics[width=2cm]{logo_dg}}
-  % \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
-  % \kern \medskipamount
-  % \hrule height 0.4pt
+    \IfFileExists{logo_dg.png}{%
+      \includegraphics[height=1.3cm]{logo_dg}}
+    {\vskip1.3cm}
+  }
   \par
   \kern 2pt
   \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
@@ -272,12 +267,10 @@
   \fancyhead{}
 }
 
-
 % \else
   % \fancyhead[LO]{\headerfirstpage}
   % \fancyhead[RO]{\doiheader}
   % \fi
-
 
 %% Bibliography
 %% clickable doi
