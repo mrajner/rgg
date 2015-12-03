@@ -5,8 +5,11 @@ DIR     := $(shell basename $$PWD)
 all: package rgg_editor.pdf
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
-authordep := rgg.cls rgg_sample_article.bib rgg_sample_article.tex rgg_sample_article.pdf
-editordep := $(authordep) master.tex master.pdf
+authordep :=                     \
+	rgg.cls rgg_sample_article.bib \
+	rgg_sample_article.tex         \
+	rgg_sample_article.pdf         \
+	figure.pdf 
 
 package: rgg-latex-guide-for-author.tar.gz
 
