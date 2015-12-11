@@ -1,0 +1,240 @@
+\documentclass{rgg}
+
+%% this package is included in this example only to list
+%% the source code at the end of this example
+%% the authors can remove this declaration
+\usepackage{verbatim}
+
+\title[The sample paper\ldots]{%
+  The sample paper and guidelines for using \LaTeX{} class for submission to 
+  Reports on Geodesy and Geoinformatics}
+\author[Smith, J., White, J.]{John Smith$^{1,2}$, Jerry White$^2$}
+\affiliation{%
+  $^1$Department of Very Important Issues,\\
+  Faculty of Even More Important Issues,\\
+  Awesome University
+  \nextaffiliation
+  $^2$Department of Geodesy Affairs,\\
+  Institute of Geodesy and Geoinformatcis
+}
+
+\begin{document}
+    \maketitle
+
+    \begin{abstract}
+      These paper give you template for preparing article for ``Reports on 
+      Geodesy and Geoinformatics''. The authors are requested to prepare the 
+      paper according to the scheme given below. The length of the abstract 
+      should be not larger than 200\,–\,250 words.
+      \keywords{insert 3\,–\,4 keywords or phrases}
+    \end{abstract}
+
+  \section{General information}
+    Use \texttt{rgg} \LaTeX{} class for article preparation.
+    Make sure that \texttt{rgg.cls} is assesible in your
+    \texttt{TEXPATH} variable or this class file can be put
+    in your working directory with other \texttt{.tex} file(s).
+
+    Using external packages and user defined commands is allowed
+    but do not change the formatting settings.
+    Remember to send all your files (except \texttt{rgg.cls}) 
+    with all your settings and inputs.
+
+  \section{Main structure}
+    \label{labelforsection}
+
+    Following sections gives the basic rules for formatting your
+    paper.
+
+  \subsection{Title, author info and abstract}
+    Use \texttt{title}, \texttt{author} 
+    and \texttt{affiliation} command
+    to define your title page. This can be done
+    in your preamble or at the beginning of the document.
+    To make titling visible use \texttt{maketitle} command.
+
+    Optionally specify short version of author(s) and title information
+    for running header (again example within this file in the square brackets).
+
+    Put appropriate reference number near each author in superscript
+    and refer this number in special \texttt{affiliation} command.
+    If all authors has the same affiliation you can skip superscripts.
+    Put your affiliation info in \texttt{affiliation} command
+    and separate several affiliations with \texttt{nextaffiliation} command.
+
+    Please put short note about author(s)
+    in \texttt{authornote} command 
+    at the end of article with short information about
+    contributors. Put your electronic address within
+    \texttt{email} command.
+    The electronic mail address of all Authors is indispensable.
+
+  \subsection{Sectioning}
+    \label{labelforsubsection}
+    For sectioning use standard \LaTeX{} commands
+    \texttt{section} and \texttt{subsection}.
+    All numbering will be added automatically.
+    To refer to section or subsection number
+    simply use \texttt{label} just after the section
+    name and then you can freely refer to it in subsequent text
+    using \texttt{ref} and label name.
+    Just like here for section~\ref{labelforsection} or
+    subsection~\ref{labelforsubsection}.
+    Do not go to deep in sectioning, \emph{i.e.} try to avoid
+    \texttt{subsubsection}s. 
+
+  \subsection{Figures}
+    You should not worry about figure placement.
+    Just wrap your graphics in \texttt{figure}
+    environment and use standard \texttt{caption}
+    command as in example below.
+    To refer to this figure again use pair of \texttt{label}
+    \texttt{ref} commands.
+    \begin{figure}
+      \includegraphics{figure}
+      \caption{This is caption of Figure~\ref{figurecaption}}
+      \label{figurecaption}
+    \end{figure}
+
+  \subsection{Tables}
+    Put your table definition in 
+    \texttt{table} environment and give appropriate caption.
+    All formatting and numbering will be set automatically.
+    The \texttt{tabular} environment is wrapped into 
+    \texttt{table} environment hence it is floating object.
+    If your table needs to be putted at specific place
+    do not omit \texttt{table} environment but put
+    optional \texttt{[H]} specifier
+    (see tables~\ref{labelforheretable} and \ref{labelforgloatingtable}).
+
+    \begin{table}[H]
+      \caption{Sample table which shows within text}
+      \label{labelforheretable}
+      \begin{tabular}{ccc}
+        \toprule
+        header1 & header2 & header3 \\
+        \midrule
+        first row  & second column & last column \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+    \begin{table}[b]
+      \caption{Sample floating table}
+      \label{labelforgloatingtable}
+      \begin{tabular}{@{}lll@{}}
+        \toprule
+        header1 & header2 & header3 \\
+        \midrule
+        first row  & second column & last column \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+  \subsection{Equations}
+    Using and referencing equations 
+    is given with standard \LaTeX{} macros.
+    \begin{equation}
+      \frac{1}{m\cdot c^2} = \frac{1}{E}
+      \label{equationlabel}
+    \end{equation}
+    This equation will be numbered properly and you
+    can refer to them with appropriate
+    \texttt{label} and \texttt{ref} command.
+    Just like here in Equation~\ref{equationlabel}.
+
+  \subsection{References}
+    You can still make your citation by hand writing, for example
+    \begin{quotation}
+      Generalization of least-squares was given in literature (Neitzel, 2010)
+    \end{quotation}
+    or 
+    \begin{quotation}
+      Newton (1687) said that the Earth is flattened at the poles. 
+    \end{quotation}
+    Within this method you have to replace \texttt{bibliography}
+    command with unnumbered section command (\texttt{section*\{References\}})
+    and then put all your bibliography there. Make sure to format bibliography
+    according to \texttt{apa} rules.
+
+    The preferred and recommended method here is to use \texttt{bibtex}
+    tool. Within this method all formatting will be done automatically.
+    See the attached \texttt{rgg\_sample\_article.bib} file.
+    Make sure to run \texttt{bibtex} command after compiling you source
+    and afterwards compile in two times more to resolve appropriately all cross 
+    references.
+    With this method citing should be done with commands given
+    in \texttt{apacite} package documentation.
+    To give a~very quick introduction we list basic usage of these commands in 
+    Table~\ref{apacitecommands}.
+    \begin{table}
+      \caption{Citing with \texttt{apacite} package}
+      \label{apacitecommands}
+      \begin{tabular}{ll}
+        \toprule
+        command                                  & output                            \\
+        \midrule
+        \verb|\cite{Neitzel2010}|                & \cite{Neitzel2010}                \\
+        \verb|\citeA{Neitzel2010,mastersthesis}| & \citeA{Neitzel2010,mastersthesis} \\
+        \verb|\cite{book}|                       & \cite{book}                       \\
+        \verb|\citeNP{phdthesis}|                & \citeNP{phdthesis}                \\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+
+  \section{Closing remarks}
+    The Author(s) are kindly requested to submit, with the manuscript, 
+    the names, and e-mail addresses of five potential reviewers. Note 
+    that the editor retains the sole right to decide whether or not the 
+    suggested reviewers are used. The names of potential reviewers should 
+    be entered in the section Comments for the Editor in the 1St step of 
+    on-line submission process.
+
+    The \texttt{rgg.cls} use some standard packages.
+    All modern distribution of \LaTeX{} compilers should include
+    these external macros.
+    If you encounter any problems read log file and if any dependencies are 
+    missing you still can download it from \TeX{} repositories.
+
+    Send all your external files (graphisc, bibliography settings) while
+    submitting to Reports on Geodesy and Geoinformatics.
+    The editors reserve the right to modify your source files to adapt it to 
+    journal requirements.
+
+    \acknowledgement{
+      If you would like to use any acknowledgement 
+      please insert it into
+      \texttt{acknowledgement} command.
+    }
+
+    \bibliography{rgg_sample_article.bib}
+
+    \authornote{%
+      Professor John Smith$^{1,2}$ \email{johnsmith@xxx.com}\\
+      PhD Jerry White$^2$ \email{jerry@yyy.pl}\\
+      $^1$Department of Very Important Issues
+
+      Faculty of Even More Important Issues,\\
+      Awesome University\\
+      Awesomness St. 8, 00-000, Freedomtown, Freedom Country
+
+      $^2$Department of Geodesy Affairs,\\
+      Institute of Geodesy and Geoinformatcis\\
+      North Pole Street, South Pole
+    }
+
+    %% this last part is just inclusion of source file 
+    %% only for documentation purposes
+    \clearpage
+  \section*{Appendix}
+
+  \subsection*{Listing of \texttt{rgg\_sample\_article.tex} file
+      (source of this document)}
+    {\scriptsize\verbatiminput{./rgg_sample_article.tex}}
+
+  \subsection*{Listing of \texttt{rgg\_sample\_article.bib} file 
+      (source of bibliography)}
+    {\scriptsize\verbatiminput{rgg_sample_article.bib}}
+
+\end{document}
+

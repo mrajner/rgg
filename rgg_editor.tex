@@ -1,0 +1,28 @@
+%% this is part of rgg latex class
+%% not intended to be distributed to authors
+%% 
+%% this file show how to set important value when preparing print-ready
+%% version of article by editor
+%%  
+%% just set all important values as in example in this
+%% and run (pdf)latex command on this file 
+%% you do not need to change the original submitted file
+%%
+%% or just simply set this value in the submitted tex source file
+%% like below:
+%% \documentclass[ 
+%% startpage = 10,
+%% ...,
+%% ]{rgg}
+
+\PassOptionsToClass{
+  % select the number of starting page, volume, year and doi
+  startpage = 11,
+  volume    = 123,
+  year      = 2015,
+  doi       = 152.rgg/abcd,
+  review    = false,
+  logodg,
+}{rgg}
+
+\input{./rgg_sample_article.tex}
