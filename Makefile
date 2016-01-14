@@ -11,9 +11,9 @@ authordep :=                     \
 	rgg_sample_article.pdf         \
 	figure.pdf 
 
-package: rgg-latex-guide-for-author.tar.gz
+package: rgg-latex-guide-for-author-latest.tar.gz
 
-rgg-latex-guide-for-author.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
+rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
 rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep)
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
@@ -33,11 +33,11 @@ figure.ps: figure.tex
 test:
 	rm -rf tmp
 	mkdir tmp
-	cd tmp                                                                \
-		&& wget www.grat.gik.pw.edu.pl/rgg/rgg-latex-guide-for-author.tar.gz \
-		&& tar zxvf rgg-latex-guide-for-author.tar.gz                        \
-		&& cd rgg                                                            \
-		&& pdflatex rgg_sample_article                                       \
-		&& wget www.grat.gik.pw.edu.pl/rgg/rgg_editor.tex                    \
-		&& pdflatex rgg_editor                                               \
+	cd tmp                                                                       \
+		&& wget www.grat.gik.pw.edu.pl/rgg/rgg-latex-guide-for-author-latest.tar.gz \
+		&& tar zxvf rgg-latex-guide-for-author-latest.tar.gz                        \
+		&& cd rgg                                                                   \
+		&& pdflatex rgg_sample_article                                              \
+		&& wget www.grat.gik.pw.edu.pl/rgg/rgg_editor.tex                           \
+		&& pdflatex rgg_editor                                                      \
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
