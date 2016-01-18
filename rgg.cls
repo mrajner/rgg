@@ -55,7 +55,7 @@
   a4paper,
   margin = 2.5cm,
   % includehead,
-  headheight=0cm,
+  headheight=1cm,
 ]
 {geometry}
 
