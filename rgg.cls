@@ -290,4 +290,6 @@
 \usepackage{enumitem}
 \setlist{nosep}
 
+%% avoid unnecessary float pages 
+\renewcommand{\floatpagefraction}{0.75}
 \endinput
