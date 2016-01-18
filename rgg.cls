@@ -290,4 +290,7 @@
 \usepackage{enumitem}
 \setlist{nosep}
 
+\widowpenalty10000
+\clubpenalty10000
+
 \endinput
