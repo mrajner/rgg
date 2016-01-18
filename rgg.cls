@@ -285,4 +285,8 @@
 %% but use rgg appropriate bibitem spacing
 \setlength{\bibitemsep}{\baselineskip}
 
+%% remove unnecessary space in lists
+\usepackage{enumitem}
+\setlist{nosep}
+
 \endinput
