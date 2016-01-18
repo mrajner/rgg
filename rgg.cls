@@ -243,6 +243,7 @@
 % \checkoddpage
 % \ifoddpage
 
+%% Crude method for uneven header separator
 %% add logo to title page
 \AtBeginDocument{%
   \thispagestyle{plain}%
