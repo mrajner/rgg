@@ -55,7 +55,7 @@
   a4paper,
   margin = 2.5cm,
   % includehead,
-  headheight=0cm,
+  headheight=1cm,
 ]
 {geometry}
 
@@ -290,7 +290,10 @@
 \usepackage{enumitem}
 \setlist{nosep}
 
+% widows and clubs
 \widowpenalty10000
 \clubpenalty10000
 
+%% avoid unnecessary float pages 
+\renewcommand{\floatpagefraction}{0.75}
 \endinput
