@@ -9,14 +9,13 @@ authordep :=                     \
 	rgg.cls rgg_sample_article.bib \
 	rgg_sample_article.tex         \
 	rgg_sample_article.pdf         \
-	figure.pdf                     \
-	VERSION.txt
+	figure.pdf
 
 package: rgg-latex-guide-for-author-latest.tar.gz
 
 rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
-rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep)
+rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
 
 clean:
@@ -43,11 +42,11 @@ test:
 		&& pdflatex rgg_editor                                                      \
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
 
-VERSION.txt: .FORCE
-	@echo This is version $$(git describe --tags \
-		| sed -e 's/-g.*//' -e  's/-/./') of LaTeX class rgg.cls > $@
+VERSION.txt: $(authordep) Makefile
+	echo This is version $$(git describe --tags \
+		| sed -e 's/-g.*//' -e  's/-/./') [$$(git show -s --format=%ci HEAD)] of LaTeX class for Reports on Geodesy and Geoinformatics -- rgg.cls > $@
 
-changes.txt: .FORCE
+changes.txt: rgg.cls
 	git log -p --no-color -- rgg.cls > $@
 
 .FORCE:
