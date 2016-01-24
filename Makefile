@@ -45,7 +45,7 @@ test:
 
 VERSION.txt: .FORCE
 	@echo This is version $$(git describe --tags \
-		| sed -e 's/-g.*//' -e  's/-/./') of rgg LaTeX.cls > $@
+		| sed -e 's/-g.*//' -e  's/-/./') of LaTeX class rgg.cls > $@
 
 changes.txt: .FORCE
 	git log -p --no-color -- rgg.cls > $@
