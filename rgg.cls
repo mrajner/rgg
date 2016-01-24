@@ -292,4 +292,8 @@
 
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
+
+\widowpenalty10000
+\clubpenalty10000
+
 \endinput
