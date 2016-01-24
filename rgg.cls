@@ -121,6 +121,9 @@
 \floatsetup[table]{
   capposition=top,
 }
+%% smaller font for tables
+\floatsetup[table]{font=small}
+
 
 \RequirePackage{caption}
 \captionsetup
