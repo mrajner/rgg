@@ -290,10 +290,10 @@
 \usepackage{enumitem}
 \setlist{nosep}
 
-%% avoid unnecessary float pages 
-\renewcommand{\floatpagefraction}{0.75}
-
+% widows and clubs
 \widowpenalty10000
 \clubpenalty10000
 
+%% avoid unnecessary float pages 
+\renewcommand{\floatpagefraction}{0.75}
 \endinput
