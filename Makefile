@@ -2,14 +2,15 @@ VERSION := $(shell git describe --tags --abbrev=0)
 COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
 
-all: package rgg_editor.pdf
+all: package rgg_editor.pdf changes.txt VERSION.txt
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
 authordep :=                     \
 	rgg.cls rgg_sample_article.bib \
 	rgg_sample_article.tex         \
 	rgg_sample_article.pdf         \
-	figure.pdf 
+	figure.pdf                     \
+	VERSION.txt
 
 package: rgg-latex-guide-for-author-latest.tar.gz
 
@@ -41,3 +42,12 @@ test:
 		&& wget www.grat.gik.pw.edu.pl/rgg/rgg_editor.tex                           \
 		&& pdflatex rgg_editor                                                      \
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
+
+VERSION.txt: .FORCE
+	@echo This is version $$(git describe --tags \
+		| sed -e 's/-g.*//' -e  's/-/./') of rgg LaTeX.cls > $@
+
+changes.txt: .FORCE
+	git log -p --no-color -- rgg.cls > $@
+
+.FORCE:

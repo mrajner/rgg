@@ -16,9 +16,12 @@
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
 %% created 20151116 Marcin Rajner
+%% up to date and development
+%% rgg.cls file can be found on 
+%% http://www.grat.gik.pw.edu.pl/rgg/
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rgg}[2015/11/16]
+\ProvidesClass{rgg}[2016/01/24]
 
 %% use standard article rules by default
 %% with 12 point font size
