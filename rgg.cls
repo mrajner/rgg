@@ -20,6 +20,9 @@
 %% rgg.cls file can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
+$Version$
+$Date$
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rgg}[2016/01/24]
 
