@@ -20,8 +20,8 @@
 %% rgg.cls file can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
-%% $Version$
-%% $Date$
+%% Version: v1.0-10-g9624e87
+%% Date:    2016-02-22 23:37:23 +0100
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rgg}[2016/01/24]
