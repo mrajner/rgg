@@ -31,7 +31,7 @@
 %% with 12 point font size
 \LoadClass[12pt,twoside]{article}
 
-%% English language rules for all document
+%% English language rules for whole document
 \RequirePackage[english]{babel}
 
 %% process class options
