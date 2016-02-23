@@ -48,5 +48,3 @@ VERSION.txt: $(authordep) Makefile
 
 changes.txt: rgg.cls
 	git log -p --no-color -- rgg.cls > $@
-
-.FORCE:
