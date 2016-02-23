@@ -1,1 +1,1 @@
-IndexIgnore expand_date Makefile figure.tex logo_dg-open.tif logo_dg.png rgg-2015-0003-1.pdf sample.docx wektorlogo_dg-open.eps .gitignore .gitattributes
+IndexIgnore expand_date Makefile figure.tex logo_dg-open.tif logo_dg.png rgg-2015-0003-1.pdf sample.docx wektorlogo_dg-open.eps .gitignore .gitattributes *.bbl *.aux post-checkout
