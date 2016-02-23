@@ -15,12 +15,12 @@
 %% or you need any fancy setting which cannot be achieved
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
-%% created 20151116 Marcin Rajner
 
 %% up to date and development version of rgg.cls file
 %% can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
+%% Created: 2015-11-16 by Marcin Rajner
 %% $Version$
 %% $Date$
 
