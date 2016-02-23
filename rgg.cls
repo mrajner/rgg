@@ -187,7 +187,8 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
-%% Use the APA format as a style of citation and reference list (see Guidelines for APA Citation Style with examples)
+%% Use the APA format as a style of citation and reference list
+%% (see Guidelines for APA Citation Style with examples)
 \bibliographystyle{apacite}
 
 %% include graphics
