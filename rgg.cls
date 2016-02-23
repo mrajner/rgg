@@ -21,8 +21,8 @@
 %% can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
-%% Version: v1.0-18-g16d844d
-%% Date:    2016-02-23 09:36:52 +0100
+%% $Version$
+%% $Date$
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rgg}[2016/01/24]
