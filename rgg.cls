@@ -16,8 +16,9 @@
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
 %% created 20151116 Marcin Rajner
-%% up to date and development
-%% rgg.cls file can be found on 
+
+%% up to date and development version of rgg.cls file
+%% can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
 %% Version: v1.0-18-g16d844d
