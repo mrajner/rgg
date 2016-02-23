@@ -1,0 +1,13 @@
+#!/bin/bash
+
+tmpfile=$(mktemp)
+./expand_date reverse < rgg.cls | ./expand_date > $tmpfile
+cat $tmpfile | grep Date > rgg.cls
+
+tput setaf 210
+echo updating \$Version\$ and \$Date\$ in rgg.cls
+tput sgr0
+
+echo "From log:     $(git log -1 --pretty=format:"%ai")"
+echo "From rgg.cls: $(grep Date rgg.cls |sed 's/%%.Date:\s*//')"
+
