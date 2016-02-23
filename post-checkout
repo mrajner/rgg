@@ -10,3 +10,5 @@ tput sgr0
 echo "From log:     $(git log -1 --pretty=format:"%ai")"
 echo "From rgg.cls: $(grep Date rgg.cls |sed 's/%%.Date:\s*//')"
 
+git clean -f
+
