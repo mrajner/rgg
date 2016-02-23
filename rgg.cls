@@ -285,8 +285,7 @@
   % \fancyhead[RO]{\doiheader}
   % \fi
 
-%% Bibliography
-%% clickable doi
+%% Bibliography clickable doi
 \RequirePackage{doi}\renewcommand{\doitext}{}
 
 %% force using apa style for bibliography
