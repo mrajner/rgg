@@ -1,6 +1,6 @@
 %% This file is LaTeX class for submission
 %% to Reports on Geodesy and Geoinformatics
-%%
+
 %% this class follows author guidelines specified at
 %% http://www.reports.gik.pw.edu.pl
 %% and mimic the official Word template
