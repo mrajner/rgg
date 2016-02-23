@@ -1,6 +1,6 @@
 %% This file is LaTeX class for submission
 %% to Reports on Geodesy and Geoinformatics
-%%
+
 %% this class follows author guidelines specified at
 %% http://www.reports.gik.pw.edu.pl
 %% and mimic the official Word template
@@ -15,16 +15,23 @@
 %% or you need any fancy setting which cannot be achieved
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
-%% created 20151116 Marcin Rajner
+
+%% up to date and development version of rgg.cls file
+%% can be found on 
+%% http://www.grat.gik.pw.edu.pl/rgg/
+
+%% Created: 2015-11-16 by Marcin Rajner
+%% $Version$
+%% $Date$
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rgg}[2015/11/16]
+\ProvidesClass{rgg}[2016/01/24]
 
 %% use standard article rules by default
 %% with 12 point font size
 \LoadClass[12pt,twoside]{article}
 
-%% English language rules for all document
+%% English language rules for whole document
 \RequirePackage[english]{babel}
 
 %% process class options
@@ -55,7 +62,7 @@
   a4paper,
   margin = 2.5cm,
   % includehead,
-  headheight=0cm,
+  headheight=1cm,
 ]
 {geometry}
 
@@ -121,6 +128,9 @@
 \floatsetup[table]{
   capposition=top,
 }
+%% smaller font for tables
+\floatsetup[table]{font=small}
+
 
 \RequirePackage{caption}
 \captionsetup
@@ -177,7 +187,8 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
-%% Use the APA format as a style of citation and reference list (see Guidelines for APA Citation Style with examples)
+%% Use the APA format as a style of citation and reference list
+%% (see Guidelines for APA Citation Style with examples)
 \bibliographystyle{apacite}
 
 %% include graphics
@@ -243,6 +254,7 @@
 % \checkoddpage
 % \ifoddpage
 
+%% Crude method for uneven header separator
 %% add logo to title page
 \AtBeginDocument{%
   \thispagestyle{plain}%
@@ -275,8 +287,7 @@
   % \fancyhead[RO]{\doiheader}
   % \fi
 
-%% Bibliography
-%% clickable doi
+%% Bibliography clickable doi
 \RequirePackage{doi}\renewcommand{\doitext}{}
 
 %% force using apa style for bibliography
@@ -285,4 +296,14 @@
 %% but use rgg appropriate bibitem spacing
 \setlength{\bibitemsep}{\baselineskip}
 
+%% remove unnecessary space in lists
+\usepackage{enumitem}
+\setlist{nosep}
+
+% widows and clubs
+\widowpenalty10000
+\clubpenalty10000
+
+%% avoid unnecessary float pages 
+\renewcommand{\floatpagefraction}{0.75}
 \endinput

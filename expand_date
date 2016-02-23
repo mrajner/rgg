@@ -1,0 +1,16 @@
+#!/usr/local/bin/ruby
+
+if ARGV[0] == 'reverse'
+  data = STDIN.read
+  puts data
+  .gsub(/%% Date:.*/   , '%% $Date$')
+  .gsub(/%% Version:.*/   , '%% $Version$')
+else
+  data = STDIN.read
+  last_date = `git log --pretty=format:"%ai" -1`
+  version   = `git describe --tags`
+
+  puts data
+  .gsub('$Date$'   , 'Date:    ' + last_date.to_s.chomp)
+  .gsub('$Version$', 'Version: ' + version.to_s.chomp)
+end
