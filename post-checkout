@@ -1,8 +1,7 @@
 #!/bin/bash
 
 tmpfile=$(mktemp)
-./expand_date reverse < rgg.cls | ./expand_date > $tmpfile
-cat $tmpfile | grep Date > rgg.cls
+./expand_date reverse < rgg.cls | ./expand_date > $tmpfile && cat $tmpfile > rgg.cls
 
 tput setaf 210
 echo updating \$Version\$ and \$Date\$ in rgg.cls
