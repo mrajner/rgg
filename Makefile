@@ -1,6 +1,7 @@
 VERSION := $(shell git describe --tags --abbrev=0)
 COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
+ARCHDIR := archive
 
 all: package rgg_editor.pdf changes.txt VERSION.txt
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
@@ -13,9 +14,13 @@ authordep :=                     \
 
 package: rgg-latex-guide-for-author-latest.tar.gz
 
-rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
+rgg-latex-guide-for-author-latest.tar.gz: $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
-rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt
+
+$(ARCHDIR):
+	mkdir -p $@
+
+$(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
 
 clean:
