@@ -15,6 +15,7 @@ package: rgg-latex-guide-for-author-latest.tar.gz
 
 rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
+
 rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt
 	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
 
@@ -28,7 +29,10 @@ figure.ps: figure.tex
 	dvips $(<v:.tex=.dvi)
 
 %.pdf: %.tex figure.pdf
-	latexmk $< > /dev/null
+	pdflatex $(<:.tex=) > /dev/null
+	bibtex $(<:.tex=) > /dev/null
+	pdflatex $(<:.tex=) > /dev/null
+	pdflatex $(<:.tex=) > /dev/null
 
 test:
 	rm -rf tmp
