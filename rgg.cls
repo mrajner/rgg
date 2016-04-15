@@ -191,6 +191,10 @@
 %% (see Guidelines for APA Citation Style with examples)
 \bibliographystyle{apacite}
 
+%% slightly modified APA style to meet `rgg` standard
+%% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
+\let\cite=\shortcite
+
 %% include graphics
 \RequirePackage{graphicx}
 
