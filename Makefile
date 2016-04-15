@@ -38,7 +38,13 @@ test:
 		&& tar zxvf rgg-latex-guide-for-author-latest.tar.gz                        \
 		&& cd rgg                                                                   \
 		&& pdflatex rgg_sample_article                                              \
+		&& bibtex rgg_sample_article                                                \
+		&& pdflatex rgg_sample_article                                              \
+		&& pdflatex rgg_sample_article                                              \
 		&& wget www.grat.gik.pw.edu.pl/rgg/rgg_editor.tex                           \
+		&& pdflatex rgg_editor                                                      \
+		&& biber rgg_editor                                                         \
+		&& pdflatex rgg_editor                                                      \
 		&& pdflatex rgg_editor                                                      \
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
 
