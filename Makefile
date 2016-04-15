@@ -14,19 +14,17 @@ authordep :=                     \
 
 package: rgg-latex-guide-for-author-latest.tar.gz
 
-rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
+rgg-latex-guide-for-author-latest.tar.gz: $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
 
 $(ARCHDIR):
 	mkdir -p $@
 
-# rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
-# 	tar -czf $@  $(addprefix ../$(DIR)/,$(authordep))
-rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
-	tar -czf $@  $(authordep)
+$(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
+	tar -czf $@  $(addprefix ../$(DIR)/,$(authordep))
 
 clean:
-	git clean -f
+	git clean -fx
 
 figure.pdf: figure.tex
 	pdflatex $<
@@ -68,3 +66,4 @@ changes.txt: rgg.cls
 cleanarchive:
 	echo $(VERSION)
 	rm $(ARCHDIR)/*v*.*.[1-9]*.tar.gz
+	make all
