@@ -3,6 +3,7 @@ COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
 ARCHDIR := archive
 
+all2: cleanarchive
 all: package rgg_editor.pdf changes.txt VERSION.txt
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
@@ -32,7 +33,7 @@ figure.ps: figure.tex
 	latex $<
 	dvips $(<v:.tex=.dvi)
 
-%.pdf: %.tex figure.pdf
+%.pdf: %.tex figure.pdf rgg.cls
 	pdflatex $(<:.tex=) > /dev/null
 	bibtex $(<:.tex=) > /dev/null
 	pdflatex $(<:.tex=) > /dev/null
@@ -62,3 +63,8 @@ VERSION.txt: $(authordep) Makefile
 
 changes.txt: rgg.cls
 	git log -p --no-color -- rgg.cls > $@
+
+cleanarchive:
+	echo $(VERSION)
+	ls $(ARCHDIR)/*v*.*.*.tar.gz
+	make all
