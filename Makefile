@@ -3,7 +3,6 @@ COMMITS := $(shell git rev-list --count $(VERSION)..HEAD)
 DIR     := $(shell basename $$PWD)
 ARCHDIR := archive
 
-all2: cleanarchive
 all: package rgg_editor.pdf changes.txt VERSION.txt
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
@@ -15,17 +14,19 @@ authordep :=                     \
 
 package: rgg-latex-guide-for-author-latest.tar.gz
 
-rgg-latex-guide-for-author-latest.tar.gz: $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
+rgg-latex-guide-for-author-latest.tar.gz: rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
 	ln -sf $< $@
 
 $(ARCHDIR):
 	mkdir -p $@
 
-$(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
-	tar czf $@ -C ../  $(addprefix $(DIR)/,$(authordep))
+# rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
+# 	tar -czf $@  $(addprefix ../$(DIR)/,$(authordep))
+rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
+	tar -czf $@  $(authordep)
 
 clean:
-	rm *.aux
+	git clean -f
 
 figure.pdf: figure.tex
 	pdflatex $<
@@ -66,5 +67,4 @@ changes.txt: rgg.cls
 
 cleanarchive:
 	echo $(VERSION)
-	ls $(ARCHDIR)/*v*.*.*.tar.gz
-	make all
+	rm $(ARCHDIR)/*v*.*.[1-9]*.tar.gz
