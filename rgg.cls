@@ -223,8 +223,9 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 
+\newcommand{\rgg}{Reports on Geodesy and Geoinformatics}
 \def\headerfirstpage{%
-  \textit{Reports on Geodesy and Geoinformatics}
+  \textit{\rgg}
   vol.\,\rgg@volume/\rgg@year; pages \rgg@startpage-\pageref{LastPage}%
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
@@ -236,7 +237,6 @@
 }
 
 %% email
-\RequirePackage[hidelinks]{hyperref}
 \newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
 \RequirePackage{array}
 
@@ -292,7 +292,9 @@
   % \fi
 
 %% Bibliography clickable doi
-\RequirePackage{doi}\renewcommand{\doitext}{}
+% \RequirePackage[hidelinks]{hyperref}
+% \RequirePackage{doi}
+% \renewcommand{\doitext}{}
 
 %% force using apa style for bibliography
 \RequirePackage[apaciteclassic]{apacite}
@@ -310,4 +312,16 @@
 
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
+
+\def\makecolophon{
+  \clearpage
+  \thispagestyle{empty}
+  \null\vfill
+  \noindent
+  \rgg\\
+  \rgg@volume\\
+  \rgg@year\\
+  dd
+  \clearpage
+}
 \endinput
