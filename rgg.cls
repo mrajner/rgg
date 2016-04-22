@@ -34,21 +34,32 @@
 %% English language rules for whole document
 \RequirePackage[english]{babel}
 
+%% For non ascii characters
+%% non-english names etc.
+\RequirePackage[T1]{fontenc}
+
+\parskip=0em
+\parindent=1.5em
+
+
 %% process class options
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
    family=rgg,
    prefix=rgg@,
 }
-\DeclareStringOption[1]{startpage}
+\DeclareStringOption[]{startpage}
 \DeclareStringOption[]{volume}
+\DeclareStringOption[1]{number}
 \DeclareStringOption[]{doi}
-\DeclareStringOption[year]{year}
+\DeclareStringOption[]{year}
 \DeclareBoolOption{review}
 \DeclareBoolOption[false]{logodg}
+\DeclareBoolOption[true]{hyperref}
+\DeclareStringOption[2391-8152]{eISNN}
+\DeclareStringOption[2391-8365]{ISSN}
 \ProcessKeyvalOptions*
-
-\setcounter{page}{\rgg@startpage}
+% \setcounter{page}{\rgg@startpage}
 
 \ifrgg@review
 \RequirePackage{lineno}
@@ -102,24 +113,39 @@
 
 %% maketitle command style
 \renewcommand\maketitle{
-  %% title bold and centred and all in upper case
   % \thispagestyle{plain}
+%% Crude method for uneven header separator
+%% add logo to title page
+% \AtBeginDocument{%
+  \thispagestyle{plain}%
+  \noindent\parbox[t]{\textwidth}{%
+    \ifrgg@logodg
+    \IfFileExists{logo_dg.png}{%
+      \includegraphics[height=1.3cm]{logo_dg}}
+    {\vskip1.3cm}
+  \fi
+}
+\par
+\kern 2pt
+\hbox to \textwidth{\headerfirstpage\hfill\doiheader}
+\kern 2pt
+\hrule height 0.4pt
+% }
   \par
   \vskip6em
-  \parbox{14cm}{
+  \parbox{14cm}{%
+  %% title bold and centred and all in upper case
     \begin{center}
       {\bfseries\large\MakeUppercase{\@title}\par}
     \end{center}
   }
-  % \vspace*{0.6cm}
   \begin{center}
     {\bfseries\@author}\\
     \vspace*{0.5em}
     {\@affiliation}
   \end{center}
-  % \vspace*{1.1 cm}
-  % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
-  % }
+
+%% no floats on title page
 \suppressfloats
 }
 
@@ -207,9 +233,11 @@
   \setlength{\leftmargin}{5em}%
     \list{}{\setlength{\rightmargin}{\leftmargin}}%
   \item\relax{\bfseries \abstractname}\newline
+    \parskip=0em
+    \parindent=1.5em
     \itshape
   }{\upshape\newline\vskip-0.5em
-    \textbf{Keywords:}
+    \noindent\textbf{Keywords:}
     \@keywords
     \vspace{0.6em}
   \endlist}
@@ -226,7 +254,19 @@
 \newcommand{\rgg}{Reports on Geodesy and Geoinformatics}
 \def\headerfirstpage{%
   \textit{\rgg}
-  vol.\,\rgg@volume/\rgg@year; pages \rgg@startpage-\pageref{LastPage}%
+  vol.\,\rgg@volume/\rgg@year;
+  pages
+  \ifx\rgg@startpage\empty
+    \thepage
+  \else
+    \rgg@startpage
+  \fi%
+  -%
+  \ifdefined\lastpage
+  \lastpage%
+    \else
+  \pageref{LastPage}%
+  \fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
@@ -258,23 +298,6 @@
 % \checkoddpage
 % \ifoddpage
 
-%% Crude method for uneven header separator
-%% add logo to title page
-\AtBeginDocument{%
-  \thispagestyle{plain}%
-  \noindent\parbox[t]{\textwidth}{%
-    \ifrgg@logodg
-    \IfFileExists{logo_dg.png}{%
-      \includegraphics[height=1.3cm]{logo_dg}}
-    {\vskip1.3cm}
-  \fi
-}
-\par
-\kern 2pt
-\hbox to \textwidth{\headerfirstpage\hfill\doiheader}
-\kern 2pt
-\hrule height 0.4pt
-}
 
 \fancyhead[LO]{\small\headerfirstpage}
 \fancyhead[RO]{\small\doiheader}
@@ -292,9 +315,11 @@
   % \fi
 
 %% Bibliography clickable doi
-% \RequirePackage[hidelinks]{hyperref}
-% \RequirePackage{doi}
-% \renewcommand{\doitext}{}
+\ifrgg@hyperref
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{doi}
+\renewcommand{\doitext}{}
+\fi
 
 %% force using apa style for bibliography
 \RequirePackage[apaciteclassic]{apacite}
@@ -313,15 +338,27 @@
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
 
-\def\makecolophon{
+\def\makecolophon{%
   \clearpage
   \thispagestyle{empty}
   \null\vfill
   \noindent
   \rgg\\
-  \rgg@volume\\
-  \rgg@year\\
-  dd
-  \clearpage
+  volume \rgg@volume, number \rgg@number, \rgg@year\\
+  \\
+  Editor in Chief\\
+  MB\\
+  \\
+  Editorial Board\\
+  \ldots\\
+  \\
+  Technical Editor\\
+  Dominik Próchniewicz\\
+  \\
+  \url{http://www.reports.gik.pw.edu.pl}\\
+  \href{mailto:reports.geodesy@gmail.com}{\texttt{reports.geodesy@gmail.com}}\\
+  \\
+  ISSN \rgg@ISSN
+  \clearpage%
 }
 \endinput
