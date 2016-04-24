@@ -1,0 +1,62 @@
+%% this package is extension to rgg.cls
+%% to combine several papers
+%%
+%% it defines 3 command
+%%
+%% \makecolophon
+%% \includerggtex
+%% \includerggpdf
+%%
+%% Marcin Rajner
+%% 2016.04.23
+
+\newcounter{inclusion}
+\setcounter{inclusion}{0}
+
+\RequirePackage{emptypage}
+\RequirePackage{standalone}
+\RequirePackage{pdfpages}
+
+% \newcommand{\includergg}[2][]{%
+%   \includepdf[#1]{#2}
+% }
+
+\RequirePackage{xparse}
+\NewDocumentCommand{\includergg}{O{} m O{} } {%
+  \addtocounter{inclusion}{1}
+  \def\lastpage{\pageref{LastPage\theinclusion}}
+  \begin{refsection}[#2]
+
+    \ifx#1\empty
+      pdf: #1
+    \else
+      \input{#2}
+    \fi
+    \label{LastPage\theinclusion}
+  \end{refsection}
+  \cleardoublepage
+}
+
+\def\makecolophon{%
+  \clearpage
+  \thispagestyle{empty}
+  \null\vfill
+  \noindent
+  \rgg\\
+  volume \rgg@volume, number \rgg@number, \rgg@year\\
+  \\
+  Editor in Chief\\
+  MB\\
+  \\
+  Editorial Board\\
+  \ldots\\
+  \\
+  Technical Editor\\
+  Dominik Próchniewicz\\
+  \\
+  \url{http://www.reports.gik.pw.edu.pl}\\
+  \href{mailto:reports.geodesy@gmail.com}{\texttt{reports.geodesy@gmail.com}}\\
+  \\
+  ISSN \rgg@ISSN
+  \clearpage%
+}

@@ -31,8 +31,8 @@
 %% with 12 point font size
 \LoadClass[12pt,twoside]{article}
 
-%% English language rules for whole document
-\RequirePackage[english]{babel}
+%% American language rules for whole document
+\RequirePackage[american]{babel}
 
 %% For non ascii characters
 %% non-english names etc.
@@ -55,11 +55,15 @@
 \DeclareStringOption[]{year}
 \DeclareBoolOption{review}
 \DeclareBoolOption[false]{logodg}
+\DeclareBoolOption[false]{biblatex}
 \DeclareBoolOption[true]{hyperref}
+\DeclareBoolOption[true]{headers}
 \DeclareStringOption[2391-8152]{eISNN}
 \DeclareStringOption[2391-8365]{ISSN}
 \ProcessKeyvalOptions*
-% \setcounter{page}{\rgg@startpage}
+\ifx\rgg@startpage\empty\else
+    \setcounter{page}{\rgg@startpage}
+\fi
 
 \ifrgg@review
 \RequirePackage{lineno}
@@ -113,28 +117,32 @@
 
 %% maketitle command style
 \renewcommand\maketitle{
-  % \thispagestyle{plain}
 %% Crude method for uneven header separator
 %% add logo to title page
-% \AtBeginDocument{%
-  \thispagestyle{plain}%
-  \noindent\parbox[t]{\textwidth}{%
-    \ifrgg@logodg
-    \IfFileExists{logo_dg.png}{%
-      \includegraphics[height=1.3cm]{logo_dg}}
-    {\vskip1.3cm}
-  \fi
+\noindent\parbox[t]{\textwidth}{%
+  \ifrgg@logodg
+  \IfFileExists{logo_dg.png}{%
+    \includegraphics[height=1.3cm]{logo_dg}}
+  {\vskip1.3cm}
+\fi
 }
 \par
 \kern 2pt
+\ifrgg@headers
 \hbox to \textwidth{\headerfirstpage\hfill\doiheader}
 \kern 2pt
 \hrule height 0.4pt
+\thispagestyle{plain}%
+\else
+  \thispagestyle{empty}%
+  \hbox to \textwidth{\phantom{\headerfirstpage\hfill\doiheader}}
+  \kern 2.4pt
+\fi
 % }
   \par
   \vskip6em
   \parbox{14cm}{%
-  %% title bold and centred and all in upper case
+    %% title bold and centred and all in upper case
     \begin{center}
       {\bfseries\large\MakeUppercase{\@title}\par}
     \end{center}
@@ -213,14 +221,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
-%% Use the APA format as a style of citation and reference list
-%% (see Guidelines for APA Citation Style with examples)
-\bibliographystyle{apacite}
-
-%% slightly modified APA style to meet `rgg` standard
-%% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
-\AtBeginDocument{\let\cite=\shortcite}
-
 %% include graphics
 \RequirePackage{graphicx}
 
@@ -247,9 +247,6 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyfoot[C]{\small\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
 
 \newcommand{\rgg}{Reports on Geodesy and Geoinformatics}
 \def\headerfirstpage{%
@@ -269,6 +266,48 @@
   \fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
+
+
+%%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
+% \RequirePackage{changepage}
+% \strictpagecheck
+% \checkoddpage
+% \ifoddpage
+
+\ifrgg@headers
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyhead[LO]{\small\headerfirstpage}
+\fancyhead[RO]{\small\doiheader}
+\fancyhead[LE]{%
+  \ifdefined\@shortauthor\ifdefined\@shorttitle
+    \textit{\small\@shortauthor:\ \@shorttitle}
+  \fi\fi
+}
+\fancyhead[RE]{}
+
+\fancypagestyle{plain}{%
+  \renewcommand{\headrulewidth}{0pt}
+  \fancyhead{}
+}
+
+% \else
+  % \fancyhead[LO]{\headerfirstpage}
+  % \fancyhead[RO]{\doiheader}
+  % \fi
+
+\else
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\fi
+
+%% Bibliography clickable doi
+\ifrgg@hyperref
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{doi}
+\renewcommand{\doitext}{}
+\fi
 
 %% acknowledgement
 \newcommand\acknowledgement[1]{%
@@ -292,40 +331,6 @@
   \end{tabular}
 }
 
-%%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
-% \RequirePackage{changepage}
-% \strictpagecheck
-% \checkoddpage
-% \ifoddpage
-
-
-\fancyhead[LO]{\small\headerfirstpage}
-\fancyhead[RO]{\small\doiheader}
-\fancyhead[LE]{\textit{\small\@shortauthor:\ \@shorttitle}}
-\fancyhead[RE]{}
-
-\fancypagestyle{plain}{%
-  \renewcommand{\headrulewidth}{0pt}
-  \fancyhead{}
-}
-
-% \else
-  % \fancyhead[LO]{\headerfirstpage}
-  % \fancyhead[RO]{\doiheader}
-  % \fi
-
-%% Bibliography clickable doi
-\ifrgg@hyperref
-\RequirePackage[hidelinks]{hyperref}
-\RequirePackage{doi}
-\renewcommand{\doitext}{}
-\fi
-
-%% force using apa style for bibliography
-\RequirePackage[apaciteclassic]{apacite}
-
-%% but use rgg appropriate bibitem spacing
-\setlength{\bibitemsep}{\baselineskip}
 
 %% remove unnecessary space in lists
 \usepackage{enumitem}
@@ -338,27 +343,32 @@
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
 
-\def\makecolophon{%
-  \clearpage
-  \thispagestyle{empty}
-  \null\vfill
-  \noindent
-  \rgg\\
-  volume \rgg@volume, number \rgg@number, \rgg@year\\
-  \\
-  Editor in Chief\\
-  MB\\
-  \\
-  Editorial Board\\
-  \ldots\\
-  \\
-  Technical Editor\\
-  Dominik Próchniewicz\\
-  \\
-  \url{http://www.reports.gik.pw.edu.pl}\\
-  \href{mailto:reports.geodesy@gmail.com}{\texttt{reports.geodesy@gmail.com}}\\
-  \\
-  ISSN \rgg@ISSN
-  \clearpage%
-}
+\ifrgg@biblatex
+%%bibliography
+\RequirePackage
+[
+  backend=biber,
+  style = apa,
+]
+{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\urlstyle{tt}
+
+\else
+
+  %% Use the APA format as a style of citation and reference list
+  %% (see Guidelines for APA Citation Style with examples)
+  \bibliographystyle{apacite}
+
+  %% force using apa style for bibliography
+  \RequirePackage[apaciteclassic]{apacite}
+
+
+  %% slightly modified APA style to meet `rgg` standard
+  %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
+  \AtBeginDocument{\let\cite=\shortcite}
+\fi
+%% use rgg appropriate bibitem spacing
+\setlength{\bibitemsep}{\baselineskip}
+
 \endinput
