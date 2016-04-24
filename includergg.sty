@@ -58,6 +58,8 @@
 
 \NewDocumentCommand{\includergg}{O{} m O{tex} } {%
 
+  \setcounter{figure}{0}
+  \setcounter{section}{0}
   \addtocounter{inclusion}{1}
   \xdef\firstpage{\thepage}
   \def\lastpage{\pageref{LastPage\theinclusion}}
