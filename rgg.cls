@@ -61,6 +61,7 @@
 \DeclareStringOption[2391-8152]{eISNN}
 \DeclareStringOption[2391-8365]{ISSN}
 \ProcessKeyvalOptions*
+
 \ifx\rgg@startpage\empty\else
     \setcounter{page}{\rgg@startpage}
 \fi
@@ -254,15 +255,17 @@
   vol.\,\rgg@volume/\rgg@year;
   pages
   \ifx\rgg@startpage\empty
-    \thepage
+    \ifdefined\firstpage
+      \firstpage
+    \fi
   \else
     \rgg@startpage
   \fi%
   -%
   \ifdefined\lastpage
-  \lastpage%
-    \else
-  \pageref{LastPage}%
+    \lastpage%
+  \else
+    \pageref{LastPage}%
   \fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
@@ -347,8 +350,9 @@
 %%bibliography
 \RequirePackage
 [
-  backend=biber,
-  style = apa,
+  backend    = biber,
+  style      = apa,
+  uniquename = false,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}

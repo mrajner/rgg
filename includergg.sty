@@ -13,25 +13,61 @@
 \newcounter{inclusion}
 \setcounter{inclusion}{0}
 
+\RequirePackage{tocloft}
+\tocloftpagestyle{empty}
+\newcommand{\listpapers}{\Large Contents}
+\newlistof{papers}{pap}{\listpapers}
+
+\renewcommand{\cftpapersleader}{ }
+
+\setlength{\cftbeforepapersskip}{1.6em}
+\usepackage{etoolbox}
 \RequirePackage{emptypage}
 \RequirePackage{standalone}
 \RequirePackage{pdfpages}
 
-% \newcommand{\includergg}[2][]{%
-%   \includepdf[#1]{#2}
-% }
-
 \RequirePackage{xparse}
-\NewDocumentCommand{\includergg}{O{} m O{} } {%
+
+\let\titleold=\title
+\let\authorold=\author
+\renewcommand{\title}[2][]{
+  \titleold[#1]{#2}
+  \def\thetitle{#2}
+}
+\renewcommand{\author}[2][]{
+  \authorold[#1]{#2}
+  \def\theauthor{#2}
+}
+
+\def\addtopapers{%
+  \addcontentsline{pap}{papers}{
+    \hyphenpenalty=10000
+    \parbox[t]{0.8\linewidth}{
+      {\bfseries\thetitle}
+      \newline
+      \em\theauthor 
+    }
+  }
+}
+
+\let\maketitleold=\maketitle
+\renewcommand{\maketitle}{
+  \maketitleold
+  \addtopapers
+}
+
+\NewDocumentCommand{\includergg}{O{} m O{tex} } {%
+
   \addtocounter{inclusion}{1}
+  \xdef\firstpage{\thepage}
   \def\lastpage{\pageref{LastPage\theinclusion}}
   \begin{refsection}[#2]
-
-    \ifx#1\empty
-      pdf: #1
-    \else
+    \ifstrequal{#3}{pdf}{
+      \addtopapers
+      \includepdf[#1]{#2}
+    }{%
       \input{#2}
-    \fi
+    }
     \label{LastPage\theinclusion}
   \end{refsection}
   \cleardoublepage
@@ -55,7 +91,8 @@
   Dominik Próchniewicz\\
   \\
   \url{http://www.reports.gik.pw.edu.pl}\\
-  \href{mailto:reports.geodesy@gmail.com}{\texttt{reports.geodesy@gmail.com}}\\
+  \href{mailto:reports.geodesy@gmail.com}
+  {\texttt{reports.geodesy@gmail.com}}\\
   \\
   ISSN \rgg@ISSN
   \clearpage%
