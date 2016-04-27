@@ -116,8 +116,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{sansmath}\sansmath
 
-%% maketitle command style
-\renewcommand\maketitle{
+\def\titlepageheading{
 %% Crude method for uneven header separator
 %% add logo to title page
 \noindent\parbox[t]{\textwidth}{%
@@ -142,6 +141,11 @@
 % }
   \par
   \vskip6em
+}
+
+%% maketitle command style
+\renewcommand\maketitle{
+  \titlepageheading
   \parbox{14cm}{%
     %% title bold and centred and all in upper case
     \begin{center}
@@ -376,6 +380,6 @@
   }
 \fi
 %% use rgg appropriate bibitem spacing
-\setlength{\bibitemsep}{\baselineskip}
+% \setlength{\bibitemsep}{1\baselineskip}
 
 \endinput

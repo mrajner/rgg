@@ -21,6 +21,7 @@
 \renewcommand{\cftpapersleader}{ }
 
 \setlength{\cftbeforepapersskip}{1.6em}
+
 \usepackage{etoolbox}
 \RequirePackage{emptypage}
 \RequirePackage{standalone}
@@ -66,7 +67,8 @@
   \begin{refsection}[#2]
     \ifstrequal{#3}{pdf}{
       \addtopapers
-      \includepdf[#1]{#2}
+      \includepdf[#1,pages=1,pagecommand={}]{#2}
+      \includepdf[#1,pages=2-,pagecommand={}]{#2}
     }{%
       \input{#2}
     }
@@ -80,16 +82,16 @@
   \thispagestyle{empty}
   \null\vfill
   \noindent
-  \rgg\\
+  \textbf{\rgg}\\
   volume \rgg@volume, number \rgg@number, \rgg@year\\
   \\
-  Editor-in-Chief\\
+  \textbf{Editor-in-Chief}\\
   Marcin Barlik\\
   \\
-  Managing Editor\\
+  \textbf{Managing Editor}\\
   Ryszard Szpunar\\
   \\
-  Editorial Board\\
+  \textbf{Editorial Board}\\
   Jerzy Chmiel\\
   Paweł Kowalski\\
   Grzegorz Lenda\\
@@ -98,18 +100,26 @@
   Paweł Pędzich\\
   Dorota Zawieska\\
   \\
-  Technical Editor\\
+  \textbf{Technical Editor}\\
   Dominik Próchniewicz\\
   \\
   \url{http://www.reports.gik.pw.edu.pl}\\
   \href{mailto:reports.geodesy@gmail.com}
   {\texttt{reports.geodesy@gmail.com}}\\
   \\
-  Publisher\\
+  \textbf{Publisher}\\
   DE GRUYTER OPEN\\
   Bogumiła Zuga 32A Str.\\
   01-811 Warsaw, Poland\\
   \\
   ISSN \rgg@ISSN
   \clearpage%
+}
+
+\def\bibtextobiblatex{
+  \let\oldcite=\cite
+  \let\citeNP=\oldcite
+  \let\cite=\parencite
+  % \renewcomand{\bibliography}[1]{\relax}
+  \let\bibliography=\addsectionbib
 }
