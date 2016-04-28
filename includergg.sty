@@ -10,6 +10,7 @@
 %% Marcin Rajner
 %% 2016.04.23
 
+% \PassOptionsToClass{draft}{article}
 \newcounter{inclusion}
 \setcounter{inclusion}{0}
 
@@ -31,12 +32,21 @@
 
 \let\titleold=\title
 \let\authorold=\author
-\renewcommand{\title}[2][]{
+
+\renewcommand{\title}[2][\empty]{
+  \ifx#1\empty
+  \titleold{#2}
+  \else
   \titleold[#1]{#2}
+  \fi
   \def\thetitle{#2}
 }
-\renewcommand{\author}[2][]{
+\renewcommand{\author}[2][\empty]{
+  \ifx#1\empty
+  \authorold{#2}
+  \else
   \authorold[#1]{#2}
+  \fi
   \def\theauthor{#2}
 }
 
@@ -116,10 +126,18 @@
   \clearpage%
 }
 
-\def\bibtextobiblatex{
+\newcommand{\bibtextobiblatex}{
   \let\oldcite=\cite
   \let\citeNP=\oldcite
   \let\cite=\parencite
   % \renewcomand{\bibliography}[1]{\relax}
-  \let\bibliography=\addsectionbib
+  % \let\bibliography=\addsectionbib
+  \renewcommand{\bibliography}[1]{
+    \printbibliography
+  }
 }
+
+% \let\olddoi=\doi
+% \renewcommand{\doi}[1]{%
+    % \def\rgg@doi{\olddoi{#1}}
+% }
