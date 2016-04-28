@@ -1,17 +1,12 @@
 %% this package is extension to rgg.cls
-%% to combine several papers
+%% to combine several papers into one volume
 %%
-%% it defines 3 command
-%%
-%% \makecolophon
-%% \includerggtex
-%% \includerggpdf
-%%
+%% no documentation -- read source files
 %% Marcin Rajner
 %% 2016.04.23
 
-% \PassOptionsToClass{draft}{article}
 \newcounter{inclusion}
+\newcounter{inclusionpages}
 \setcounter{inclusion}{0}
 
 \RequirePackage{tocloft}
@@ -21,7 +16,7 @@
 
 \renewcommand{\cftpapersleader}{ }
 
-\setlength{\cftbeforepapersskip}{1.6em}
+\setlength{\cftbeforepapersskip}{1.7em}
 
 \usepackage{etoolbox}
 \RequirePackage{emptypage}
@@ -67,22 +62,41 @@
   \addtopapers
 }
 
-\NewDocumentCommand{\includergg}{O{} m O{tex} } {%
-
+\NewDocumentCommand{\includergg}{O{} m O{tex} O{\empty} } {%
   \setcounter{figure}{0}
   \setcounter{section}{0}
   \addtocounter{inclusion}{1}
   \xdef\firstpage{\thepage}
-  \def\lastpage{\pageref{LastPage\theinclusion}}
+  \ifstrequal{#3}{pdf}{
+    \def\lastpage{\pageref{LastPage\theinclusion}}
+  }{%
+    \def\lastpage{\pageref{LastPage\theinclusion}}
+  }
   \begin{refsection}[#2]
+  \ifx#4\empty\else\doi{#4}\fi
+
     \ifstrequal{#3}{pdf}{
       \addtopapers
-      \includepdf[#1,pages=1,pagecommand={}]{#2}
-      \includepdf[#1,pages=2-,pagecommand={}]{#2}
+      \setcounter{inclusionpages}{0}
+      \includepdf[
+        #1,
+        pages=-,
+        pagecommand={
+          \addtocounter{inclusionpages}{1}
+          \ifnum\theinclusionpages=1
+            \thispagestyle{empty}
+            \titlepageheading
+          \fi
+          \ifnum\theinclusionpages=\the\pdflastximagepages
+            \label{LastPage\theinclusion}
+          \fi
+        }
+      ]
+      {#2}
     }{%
       \input{#2}
+      \label{LastPage\theinclusion}
     }
-    \label{LastPage\theinclusion}
   \end{refsection}
   \cleardoublepage
 }
@@ -137,7 +151,7 @@
   }
 }
 
-% \let\olddoi=\doi
-% \renewcommand{\doi}[1]{%
-    % \def\rgg@doi{\olddoi{#1}}
-% }
+\let\olddoi=\doi
+\renewcommand{\doi}[1]{%
+  \def\rgg@doi{\olddoi{#1}}
+}

@@ -41,7 +41,6 @@
 \parskip=0em
 \parindent=1.5em
 
-
 %% process class options
 \RequirePackage{kvoptions}
 \SetupKeyvalOptions{
@@ -146,12 +145,12 @@
 %% maketitle command style
 \renewcommand\maketitle{
   \titlepageheading
-  \parbox{14cm}{%
+  % \parbox{14cm}{%
     %% title bold and centred and all in upper case
     \begin{center}
       {\bfseries\large\MakeUppercase{\@title}\par}
     \end{center}
-  }
+  % }
   \begin{center}
     {\bfseries\@author}\\
     \vspace*{0.5em}
@@ -255,17 +254,20 @@
 
 \newcommand{\rgg}{Reports on Geodesy and Geoinformatics}
 \def\headerfirstpage{%
+  \small
   \textit{\rgg}
   vol.\,\rgg@volume/\rgg@year;
   pages
   \ifx\rgg@startpage\empty
     \ifdefined\firstpage
       \firstpage
+    \else
+      \thepage%
     \fi
   \else
     \rgg@startpage
   \fi%
-  -%
+  \,-\,%
   \ifdefined\lastpage
     \lastpage%
   \else
@@ -362,6 +364,13 @@
 \DeclareLanguageMapping{american}{american-apa}
 \urlstyle{tt}
 
+\AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
+\AtBeginBibliography{%
+  \renewcommand*{\finalnamedelim}{%
+    \ifthenelse{\value{listcount}>\maxprtauth}
+    {}
+    {\finalandcomma\addspace\&\space}}}
+
 \else
 
   %% Use the APA format as a style of citation and reference list
@@ -370,7 +379,6 @@
 
   %% force using apa style for bibliography
   \RequirePackage[apaciteclassic]{apacite}
-
 
   %% slightly modified APA style to meet `rgg` standard
   %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
