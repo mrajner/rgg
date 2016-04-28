@@ -62,7 +62,7 @@
   \addtopapers
 }
 
-\NewDocumentCommand{\includergg}{O{} m O{tex} O{\empty} } {%
+\NewDocumentCommand{\includergg}{O{} m O{tex} O{\empty} O{} } {%
   \setcounter{figure}{0}
   \setcounter{section}{0}
   \addtocounter{inclusion}{1}
@@ -72,7 +72,7 @@
   }{%
     \def\lastpage{\pageref{LastPage\theinclusion}}
   }
-  \begin{refsection}[#2]
+  \begin{refsection}[#2,#5]
   \ifx#4\empty\else\doi{#4}\fi
 
     \ifstrequal{#3}{pdf}{
