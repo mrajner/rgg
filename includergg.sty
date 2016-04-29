@@ -28,6 +28,12 @@
 \let\titleold=\title
 \let\authorold=\author
 
+
+\let\olddoi=\doi
+\renewcommand{\doi}[1]{%
+  \def\rgg@doi{\olddoi{#1}}
+}
+
 \renewcommand{\title}[2][\empty]{
   \ifx#1\empty
   \titleold{#2}
@@ -99,8 +105,8 @@
       \input{#2}
       \label{LastPage\theinclusion}
     }
-  \end{refsection}
   \cleardoublepage
+  \end{refsection}
 }
 
 \def\makecolophon{%
@@ -153,7 +159,11 @@
   }
 }
 
-\let\olddoi=\doi
-\renewcommand{\doi}[1]{%
-  \def\rgg@doi{\olddoi{#1}}
+% TODO temporary for volume100 rgg
+\DeclareFieldFormat{titlecase}{%
+  % \MakeSentenceCase{#1}
+  #1
+}
+\DeclareFieldFormat{apacase}{%
+  {#1}
 }

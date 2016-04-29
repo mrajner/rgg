@@ -277,7 +277,7 @@ pages
 \else
   \rgg@startpage
 \fi%
-\,-\,%
+-%
 \ifdefined\lastpage
   \lastpage%
 \else
@@ -369,7 +369,7 @@ pages
   backend    = biber,
   style      = apa,
   uniquename = false,
-  maxbibnames = 99,
+  % maxbibnames = 99,
   % maxnames = 2,
   % minnames = 1,
 ]
@@ -383,6 +383,9 @@ pages
     \ifthenelse{\value{listcount}>\maxprtauth}
     {}
     {\finalandcomma\addspace\&\space}}}
+\RequirePackage{xpatch}
+\xpatchnameformat{labelname}
+  {\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
 
 \else
 
