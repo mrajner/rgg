@@ -52,6 +52,7 @@
 \DeclareStringOption[1]{number}
 \DeclareStringOption[]{doi}
 \DeclareStringOption[]{year}
+\DeclareStringOption[\empty]{type}
 \DeclareBoolOption{review}
 \DeclareBoolOption[false]{logodg}
 \DeclareBoolOption[false]{biblatex}
@@ -139,7 +140,16 @@
 \fi
 % }
   \par
-  \vskip6em
+  \vskip5em
+  \raisebox{0pt}[0pt][0pt]{
+    \ifdefined\arttype
+      % \fcolorbox{white}{black}{
+      %   \textcolor{white}{\arttype}
+      % }
+    \fbox{\arttype}
+    \fi
+  }
+  \vskip1em
 }
 
 %% maketitle command style
@@ -150,15 +160,15 @@
     \begin{center}
       {\bfseries\large\MakeUppercase{\@title}\par}
     \end{center}
-  % }
+    % }
   \begin{center}
     {\bfseries\@author}\\
     \vspace*{0.5em}
     {\@affiliation}
   \end{center}
 
-%% no floats on title page
-\suppressfloats
+  %% no floats on title page
+  \suppressfloats
 }
 
 %% float environments
@@ -257,22 +267,22 @@
   \small
   \textit{\rgg}
   vol.\,\rgg@volume/\rgg@year;
-  pages
-  \ifx\rgg@startpage\empty
-    \ifdefined\firstpage
-      \firstpage
-    \else
-      \thepage%
-    \fi
+pages
+\ifx\rgg@startpage\empty
+  \ifdefined\firstpage
+    \firstpage
   \else
-    \rgg@startpage
-  \fi%
-  \,-\,%
-  \ifdefined\lastpage
-    \lastpage%
-  \else
-    \pageref{LastPage}%
+    \thepage%
   \fi
+\else
+  \rgg@startpage
+\fi%
+\,-\,%
+\ifdefined\lastpage
+  \lastpage%
+\else
+  \pageref{LastPage}%
+\fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
@@ -291,8 +301,8 @@
 \fancyhead[RO]{\small\doiheader}
 \fancyhead[LE]{%
   \ifdefined\@shortauthor\ifdefined\@shorttitle
-    \textit{\small\@shortauthor:\ \@shorttitle}
-  \fi\fi
+      \textit{\small\@shortauthor:\ \@shorttitle}
+    \fi\fi
 }
 \fancyhead[RE]{}
 
@@ -307,8 +317,8 @@
   % \fi
 
 \else
-\renewcommand{\headrulewidth}{0.0pt}
-\renewcommand{\footrulewidth}{0.0pt}
+  \renewcommand{\headrulewidth}{0.0pt}
+  \renewcommand{\footrulewidth}{0.0pt}
 \fi
 
 %% Bibliography clickable doi
@@ -359,6 +369,9 @@
   backend    = biber,
   style      = apa,
   uniquename = false,
+  maxbibnames = 99,
+  % maxnames = 2,
+  % minnames = 1,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}
