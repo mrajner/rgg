@@ -340,7 +340,7 @@ pages
 
 %% authornote
 \newcommand{\authornote}[1]{%
-  \vskip2em
+  \vskip1em
   \noindent\rule{0.5\textwidth}{0.4pt}\\
   \let\\\newline
   \begin{tabular}
