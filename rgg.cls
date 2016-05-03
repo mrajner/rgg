@@ -266,23 +266,23 @@
 \def\headerfirstpage{%
   \small
   \textit{\rgg}
-  vol.\,\rgg@volume/\rgg@year;
-pages
-\ifx\rgg@startpage\empty
-  \ifdefined\firstpage
-    \firstpage
+  vol.\,\rgg@volume/\rgg@year; %{
+  pp.\,%
+  \ifx\rgg@startpage\empty
+    \ifdefined\firstpage
+      \firstpage
+    \else
+      \thepage%
+    \fi
   \else
-    \thepage%
+    \rgg@startpage
+  \fi%
+  -%
+  \ifdefined\lastpage
+    \lastpage%
+  \else
+    \pageref{LastPage}%
   \fi
-\else
-  \rgg@startpage
-\fi%
--%
-\ifdefined\lastpage
-  \lastpage%
-\else
-  \pageref{LastPage}%
-\fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
@@ -301,7 +301,7 @@ pages
 \fancyhead[RO]{\small\doiheader}
 \fancyhead[LE]{%
   \ifdefined\@shortauthor\ifdefined\@shorttitle
-      \textit{\small\@shortauthor:\ \@shorttitle}
+      \textit{\def\emph{}\small\@shortauthor:\ \@shorttitle}
     \fi\fi
 }
 \fancyhead[RE]{}
@@ -369,9 +369,9 @@ pages
   backend    = biber,
   style      = apa,
   uniquename = false,
-  % maxbibnames = 99,
+  maxbibnames = 99,
   % maxnames = 2,
-  % minnames = 1,
+  minnames = 1,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}
