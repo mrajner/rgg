@@ -185,6 +185,7 @@
 {
   labelsep=period,
   labelfont={bf,small},
+  font=small,
 }
 \captionsetup[figure]{
   name=Fig.,
