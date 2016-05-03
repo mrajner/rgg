@@ -371,7 +371,7 @@
   uniquename = false,
   maxbibnames = 99,
   % maxnames = 2,
-  minnames = 1,
+  % minnames = 1,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}
