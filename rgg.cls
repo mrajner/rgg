@@ -371,6 +371,7 @@
   style      = apa,
   uniquename = false,
   maxbibnames = 99,
+  apamaxprtauthor = 99,
   % maxnames = 2,
   % minnames = 1,
 ]
@@ -378,7 +379,9 @@
 \DeclareLanguageMapping{american}{american-apa}
 \urlstyle{tt}
 
+% \renewcommand\maxprtauth{99}
 \AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
+
 \AtBeginBibliography{%
   \renewcommand*{\finalnamedelim}{%
     \ifthenelse{\value{listcount}>\maxprtauth}
