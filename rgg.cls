@@ -370,9 +370,11 @@
   backend    = biber,
   style      = apa,
   uniquename = false,
+  uniquelist = minyear,
   maxbibnames = 99,
+  labeldate = true,
   % maxprtauthor = 99,
-  % maxnames = 2,
+  maxcitenames = 2,
   % minnames = 1,
 ]
 {biblatex}
