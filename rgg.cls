@@ -357,8 +357,8 @@
 \setlist{nosep}
 
 % widows and clubs
-\widowpenalty10000
-\clubpenalty10000
+% \widowpenalty10000
+% \clubpenalty10000
 
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
@@ -367,31 +367,30 @@
 %%bibliography
 \RequirePackage
 [
-  backend    = biber,
-  style      = apa,
-  uniquename = false,
-  uniquelist = minyear,
-  maxbibnames = 99,
-  labeldate = true,
-  % maxprtauthor = 99,
-  maxcitenames = 2,
+  backend       = biber,
+  style         = apa,
+  uniquename    = false,
+  uniquelist    = minyear,
+  maxbibnames   = 99,
+  labeldate     = true,
+  apamaxprtauth = 99,
+  maxcitenames  = 2,
   % minnames = 1,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}
 \urlstyle{tt}
 
-\renewcommand\maxprtauth{99}
-\AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
+% \AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
 
-\AtBeginBibliography{%
-  \renewcommand*{\finalnamedelim}{%
-    \ifthenelse{\value{listcount}>\maxprtauth}
-    {}
-    {\finalandcomma\addspace\&\space}}}
-\RequirePackage{xpatch}
-\xpatchnameformat{labelname}
-  {\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
+% \AtBeginBibliography{%
+%   \renewcommand*{\finalnamedelim}{%
+%     \ifthenelse{\value{listcount}>\maxprtauth}
+%     {}
+%     {\finalandcomma\addspace\&\space}}}
+% \RequirePackage{xpatch}
+% \xpatchnameformat{labelname}
+%   {\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
 
 \else
 
