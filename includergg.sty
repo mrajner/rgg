@@ -55,9 +55,13 @@
   \addcontentsline{pap}{papers}{
     \hyphenpenalty=10000
     \parbox[t]{0.8\linewidth}{
+      \ifdefined\thetitle
       {\bfseries\thetitle}
+      \fi
+      \ifdefined\theauthor
       \newline
       \em\theauthor 
+      \fi
     }
   }
 }
@@ -70,6 +74,7 @@
 
 \NewDocumentCommand{\includergg}{O{} m O{tex} O{\empty} O{} } {%
   \setcounter{figure}{0}
+  \setcounter{table}{0}
   \setcounter{section}{0}
   \addtocounter{inclusion}{1}
   \gdef\@keywords{}
@@ -147,26 +152,4 @@
   \\
   ISSN \rgg@ISSN
   \clearpage%
-}
-
-\newcommand{\bibtextobiblatex}{
-  \let\oldcite=\cite
-  \let\citeNP=\oldcite
-  \let\cite=\parencite
-  \let\citeA=\textcite
-  % \renewcomand{\bibliography}[1]{\relax}
-  % \let\bibliography=\addsectionbib
-  \relax
-  \renewcommand{\bibliography}[1]{
-    \printbibliography
-  }
-}
-
-% TODO temporary for volume100 rgg
-\DeclareFieldFormat{titlecase}{%
-  % \MakeSentenceCase{#1}
-  #1
-}
-\DeclareFieldFormat{apacase}{%
-  {#1}
 }

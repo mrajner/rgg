@@ -54,9 +54,9 @@
 }
 
 @proceedings{proceedings,
-  title        = {The title of the work},
+  title        = {The title of the proceedings},
   year         = {1993},
-  editor       = {Peter Kidwelly},
+  editor       = {Peter Kidwelly and M. Horba},
   volume       = {4},
   series       = {5},
   address      = {The address of the publisher},
@@ -65,10 +65,32 @@
   publisher    = {The name of the publisher},
 }
 
+@inproceedings{inproceedings,
+  title        = {The title of the work in proceedings},
+  year         = {1993},
+  author       = {A. Adam and B. Boris and C. Corry},
+  crossref     = {proceedings},
+  booktitle    = {The title of the proceedings},
+}
+
 @article{multiplenames,
   title   = {Example of citation with more then three names},
   year    = {2016},
   author  = {George Maxwell and Isaac Newton and George Darwin and Aristoteles and Someone Else},
+  journal = {Geoscience},
+}
+
+@article{threenames,
+  title   = {Example of citation with three names},
+  year    = {2006},
+  author  = {George Maxwell and Isaac Newton and George Darwin},
+  journal = {Geoscience},
+}
+
+@article{moretheneight,
+  title   = {Example of citation with more then eight names},
+  year    = {2013},
+  author  = {George Maxwell and Isaac Newton and George Darwin and Aristoteles and Someone Else and Me To and He Also and More People and All Class and Lord Vader and Jesse Owens},
   journal = {Geoscience},
 }
 

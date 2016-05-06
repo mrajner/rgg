@@ -186,12 +186,8 @@
   labelsep=period,
   labelfont={bf,small},
   font=small,
-}
-\captionsetup[figure]{
-  name=Fig.,
-}
-\captionsetup[table]{
-  name=Tab.,
+  tablename=Tab.,
+  figurename=Fig.,
 }
 
 \RequirePackage{booktabs}
@@ -339,16 +335,24 @@
 \newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
 \RequirePackage{array}
 
+\newcommand\disappearingrule{%
+  \par 
+  \vskip5pt
+  \leaders\vrule width 0.5\textwidth\vskip0.4pt
+  \nointerlineskip
+  \vskip-5pt\nobreak
+}
 %% authornote
+\RequirePackage{array,longtable}
 \newcommand{\authornote}[1]{%
-  \vskip1em
-  \noindent\rule{0.5\textwidth}{0.4pt}\\
-  \let\\\newline
-  \begin{tabular}
+  \thisfloatsetup{font=normalsize}
+  \pagebreak[2]
+  \disappearingrule
+  \begin{longtable}
     {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
     \textbf{Authors:} 
     & \let\\\newline #1
-  \end{tabular}
+  \end{longtable}
 }
 
 
@@ -359,6 +363,7 @@
 % widows and clubs
 % \widowpenalty10000
 % \clubpenalty10000
+\usepackage[all]{nowidow}
 
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
@@ -374,24 +379,34 @@
   maxbibnames   = 99,
   labeldate     = true,
   apamaxprtauth = 99,
-  maxcitenames  = 2,
-  % minnames = 1,
 ]
 {biblatex}
 \DeclareLanguageMapping{american}{american-apa}
 \urlstyle{tt}
 
-% \AtBeginDocument{\renewcommand\finalandcomma{\addcomma}}
+\RequirePackage{xpatch}
+\xpatchnameformat{labelname}
+{\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
 
-% \AtBeginBibliography{%
-%   \renewcommand*{\finalnamedelim}{%
-%     \ifthenelse{\value{listcount}>\maxprtauth}
-%     {}
-%     {\finalandcomma\addspace\&\space}}}
-% \RequirePackage{xpatch}
-% \xpatchnameformat{labelname}
-%   {\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
+  \newcommand{\bibtextobiblatex}{
+    \let\oldcite=\cite
+    \let\citeNP=\oldcite\relax
+    \let\cite=\parencite\relax
+    \let\citeA=\textcite\relax
+    \RenewDocumentCommand{\bibliography}{m}{
+      \printbibliography
+    }
+  }
 
+  %% keep title captialics in bibliography as 
+  %% they where given by authors
+  \DeclareFieldFormat{titlecase}{%
+    % \MakeSentenceCase{#1}
+    #1
+  }
+  \DeclareFieldFormat{apacase}{%
+    {#1}
+  }
 \else
 
   %% Use the APA format as a style of citation and reference list
@@ -405,6 +420,7 @@
   %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
   \AtBeginDocument{%
     \let\cite=\shortcite
+    \let\citeA=\shortciteA
     \let\citeNP=\shortciteNP
   }
 \fi
