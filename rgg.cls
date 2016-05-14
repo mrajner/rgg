@@ -417,7 +417,8 @@
   \RequirePackage[apaciteclassic]{apacite}
 
   %% slightly modified APA style to meet `rgg` standard
-  %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
+  %% i.e. give et al. if at least 3 authors
+  %% (originall APA truncate names after 5 authors)
   \AtBeginDocument{%
     \let\cite=\shortcite
     \let\citeA=\shortciteA
