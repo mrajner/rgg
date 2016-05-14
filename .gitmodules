@@ -1,0 +1,3 @@
+[submodule "rgg100"]
+	path = rgg100
+	url = grat:/home/mrajner/git/rgg100.git

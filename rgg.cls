@@ -31,8 +31,15 @@
 %% with 12 point font size
 \LoadClass[12pt,twoside]{article}
 
-%% English language rules for whole document
-\RequirePackage[english]{babel}
+%% American language rules for whole document
+\RequirePackage[american]{babel}
+
+%% For non ascii characters
+%% non-english names etc.
+\RequirePackage[T1]{fontenc}
+
+\parskip=0em
+\parindent=1.5em
 
 %% process class options
 \RequirePackage{kvoptions}
@@ -40,15 +47,24 @@
    family=rgg,
    prefix=rgg@,
 }
-\DeclareStringOption[1]{startpage}
+\DeclareStringOption[]{startpage}
 \DeclareStringOption[]{volume}
+\DeclareStringOption[1]{number}
 \DeclareStringOption[]{doi}
-\DeclareStringOption[year]{year}
+\DeclareStringOption[]{year}
+\DeclareStringOption[\empty]{type}
 \DeclareBoolOption{review}
 \DeclareBoolOption[false]{logodg}
+\DeclareBoolOption[false]{biblatex}
+\DeclareBoolOption[true]{hyperref}
+\DeclareBoolOption[true]{headers}
+\DeclareStringOption[2391-8152]{eISNN}
+\DeclareStringOption[2391-8365]{ISSN}
 \ProcessKeyvalOptions*
 
-\setcounter{page}{\rgg@startpage}
+\ifx\rgg@startpage\empty\else
+    \setcounter{page}{\rgg@startpage}
+\fi
 
 \ifrgg@review
 \RequirePackage{lineno}
@@ -100,27 +116,59 @@
 \renewcommand{\familydefault}{\sfdefault}
 \RequirePackage{sansmath}\sansmath
 
+\def\titlepageheading{
+%% Crude method for uneven header separator
+%% add logo to title page
+\noindent\parbox[t]{\textwidth}{%
+  \ifrgg@logodg
+  \IfFileExists{logo_dg.png}{%
+    \includegraphics[height=1.3cm]{logo_dg}}
+  {\vskip1.3cm}
+\fi
+}
+\par
+\kern 2pt
+\ifrgg@headers
+\hbox to \textwidth{\headerfirstpage\hfill\doiheader}
+\kern 2pt
+\hrule height 0.4pt
+\thispagestyle{plain}%
+\else
+  \thispagestyle{empty}%
+  \hbox to \textwidth{\phantom{\headerfirstpage\hfill\doiheader}}
+  \kern 2.4pt
+\fi
+% }
+  \par
+  \vskip5em
+  \raisebox{0pt}[0pt][0pt]{
+    \ifdefined\arttype
+      % \fcolorbox{white}{black}{
+      %   \textcolor{white}{\arttype}
+      % }
+    \fbox{\arttype}
+    \fi
+  }
+  \vskip1em
+}
+
 %% maketitle command style
 \renewcommand\maketitle{
-  %% title bold and centred and all in upper case
-  % \thispagestyle{plain}
-  \par
-  \vskip6em
-  \parbox{14cm}{
+  \titlepageheading
+  % \parbox{14cm}{%
+    %% title bold and centred and all in upper case
     \begin{center}
       {\bfseries\large\MakeUppercase{\@title}\par}
     \end{center}
-  }
-  % \vspace*{0.6cm}
+    % }
   \begin{center}
     {\bfseries\@author}\\
     \vspace*{0.5em}
     {\@affiliation}
   \end{center}
-  % \vspace*{1.1 cm}
-  % \vskip 30\p@ \@plus 10\p@ \@minus 2\p@
-  % }
-\suppressfloats
+
+  %% no floats on title page
+  \suppressfloats
 }
 
 %% float environments
@@ -137,12 +185,9 @@
 {
   labelsep=period,
   labelfont={bf,small},
-}
-\captionsetup[figure]{
-  name=Fig.,
-}
-\captionsetup[table]{
-  name=Tab.,
+  font=small,
+  tablename=Tab.,
+  figurename=Fig.,
 }
 
 \RequirePackage{booktabs}
@@ -187,10 +232,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 
-%% Use the APA format as a style of citation and reference list
-%% (see Guidelines for APA Citation Style with examples)
-\bibliographystyle{apacite}
-
 %% include graphics
 \RequirePackage{graphicx}
 
@@ -203,9 +244,11 @@
   \setlength{\leftmargin}{5em}%
     \list{}{\setlength{\rightmargin}{\leftmargin}}%
   \item\relax{\bfseries \abstractname}\newline
+    \parskip=0em
+    \parindent=1.5em
     \itshape
   }{\upshape\newline\vskip-0.5em
-    \textbf{Keywords:}
+    \noindent\textbf{Keywords:}
     \@keywords
     \vspace{0.6em}
   \endlist}
@@ -215,38 +258,31 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\fancyfoot[C]{\small\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
 
+\newcommand{\rgg}{Reports on Geodesy and Geoinformatics}
 \def\headerfirstpage{%
-  \textit{Reports on Geodesy and Geoinformatics}
-  vol.\,\rgg@volume/\rgg@year; pages \rgg@startpage-\pageref{LastPage}%
+  \small
+  \textit{\rgg}
+  vol.\,\rgg@volume/\rgg@year; %{
+  pp.\,%
+  \ifx\rgg@startpage\empty
+    \ifdefined\firstpage
+      \firstpage
+    \else
+      \thepage%
+    \fi
+  \else
+    \rgg@startpage
+  \fi%
+  -%
+  \ifdefined\lastpage
+    \lastpage%
+  \else
+    \pageref{LastPage}%
+  \fi
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
-%% acknowledgement
-\newcommand\acknowledgement[1]{%
-\section*{Acknowledgement}
-  {\small#1}%
-}
-
-%% email
-\RequirePackage[hidelinks]{hyperref}
-\newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
-\RequirePackage{array}
-
-%% authornote
-\newcommand{\authornote}[1]{%
-  \vskip2em
-  \noindent\rule{0.5\textwidth}{0.4pt}\\
-  \let\\\newline
-  \begin{tabular}
-    {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
-    \textbf{Authors:} 
-    & \let\\\newline #1
-  \end{tabular}
-}
 
 %%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
 % \RequirePackage{changepage}
@@ -254,27 +290,17 @@
 % \checkoddpage
 % \ifoddpage
 
-%% Crude method for uneven header separator
-%% add logo to title page
-\AtBeginDocument{%
-  \thispagestyle{plain}%
-  \noindent\parbox[t]{\textwidth}{%
-    \ifrgg@logodg
-    \IfFileExists{logo_dg.png}{%
-      \includegraphics[height=1.3cm]{logo_dg}}
-    {\vskip1.3cm}
-  \fi
-}
-\par
-\kern 2pt
-\hbox to \textwidth{\headerfirstpage\hfill\doiheader}
-\kern 2pt
-\hrule height 0.4pt
-}
-
+\ifrgg@headers
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 \fancyhead[LO]{\small\headerfirstpage}
 \fancyhead[RO]{\small\doiheader}
-\fancyhead[LE]{\textit{\small\@shortauthor:\ \@shorttitle}}
+\fancyhead[LE]{%
+  \ifdefined\@shortauthor\ifdefined\@shorttitle
+      \textit{\def\emph{}\small\@shortauthor:\ \@shorttitle}
+    \fi\fi
+}
 \fancyhead[RE]{}
 
 \fancypagestyle{plain}{%
@@ -287,23 +313,118 @@
   % \fancyhead[RO]{\doiheader}
   % \fi
 
+\else
+  \renewcommand{\headrulewidth}{0.0pt}
+  \renewcommand{\footrulewidth}{0.0pt}
+\fi
+
 %% Bibliography clickable doi
-\RequirePackage{doi}\renewcommand{\doitext}{}
+\ifrgg@hyperref
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{doi}
+\renewcommand{\doitext}{}
+\fi
 
-%% force using apa style for bibliography
-\RequirePackage[apaciteclassic]{apacite}
+%% acknowledgement
+\newcommand\acknowledgement[1]{%
+\section*{Acknowledgement}
+  {\small#1}%
+}
 
-%% but use rgg appropriate bibitem spacing
-\setlength{\bibitemsep}{\baselineskip}
+%% email
+\newcommand\email[1]{\href{mailto:#1}{\texttt{#1}}}
+\RequirePackage{array}
+
+\newcommand\disappearingrule{%
+  \par 
+  \vskip5pt
+  \leaders\vrule width 0.5\textwidth\vskip0.4pt
+  \nointerlineskip
+  \vskip-5pt\nobreak
+}
+%% authornote
+\RequirePackage{array,longtable}
+\newcommand{\authornote}[1]{%
+  \thisfloatsetup{font=normalsize}
+  \pagebreak[2]
+  \disappearingrule
+  \begin{longtable}
+    {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
+    \textbf{Authors:} 
+    & \let\\\newline #1
+  \end{longtable}
+}
+
 
 %% remove unnecessary space in lists
 \usepackage{enumitem}
 \setlist{nosep}
 
 % widows and clubs
-\widowpenalty10000
-\clubpenalty10000
+% \widowpenalty10000
+% \clubpenalty10000
+\usepackage[all]{nowidow}
 
 %% avoid unnecessary float pages 
 \renewcommand{\floatpagefraction}{0.75}
+
+\ifrgg@biblatex
+%%bibliography
+\RequirePackage
+[
+  backend       = biber,
+  style         = apa,
+  uniquename    = false,
+  uniquelist    = minyear,
+  maxbibnames   = 99,
+  labeldate     = true,
+  apamaxprtauth = 99,
+]
+{biblatex}
+\DeclareLanguageMapping{american}{american-apa}
+\urlstyle{tt}
+
+\RequirePackage{xpatch}
+\xpatchnameformat{labelname}
+{\ifciteseen}{\ifnumcomp{\value{listtotal}}{>}{\value{maxnames}}}{}{}
+
+  \newcommand{\bibtextobiblatex}{
+    \let\oldcite=\cite
+    \let\citeNP=\oldcite\relax
+    \let\cite=\parencite\relax
+    \let\citeA=\textcite\relax
+    \RenewDocumentCommand{\bibliography}{m}{
+      \printbibliography
+    }
+  }
+
+  %% keep title captialics in bibliography as 
+  %% they where given by authors
+  \DeclareFieldFormat{titlecase}{%
+    % \MakeSentenceCase{#1}
+    #1
+  }
+  \DeclareFieldFormat{apacase}{%
+    {#1}
+  }
+\else
+
+  %% Use the APA format as a style of citation and reference list
+  %% (see Guidelines for APA Citation Style with examples)
+  \bibliographystyle{apacite}
+
+  %% force using apa style for bibliography
+  \RequirePackage[apaciteclassic]{apacite}
+
+  %% slightly modified APA style to meet `rgg` standard
+  %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
+  \AtBeginDocument{%
+    \let\cite=\shortcite
+    \let\citeA=\shortciteA
+    \let\citeNP=\shortciteNP
+  }
+\fi
+%% use rgg appropriate bibitem spacing
+% \setlength{\bibitemsep}{1\baselineskip}
+
 \endinput

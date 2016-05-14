@@ -1,5 +1,4 @@
 \documentclass{rgg}
-
 %% this package is included in this example only to list
 %% the source code at the end of this example
 %% the authors can remove this declaration
@@ -7,7 +6,7 @@
 
 \title[The sample paper\ldots]{%
   The sample paper and guidelines for using \LaTeX{} class for submission to 
-  Reports on Geodesy and Geoinformatics}
+  Reports~on~Geodesy~and~Geoinformatics}
 \author[Smith, J., White, J.]{John Smith$^{1,2}$, Jerry White$^2$}
 \affiliation{%
   $^1$Department of Very Important Issues,\\
@@ -15,7 +14,7 @@
   Awesome University
   \nextaffiliation
   $^2$Department of Geodesy Affairs,\\
-  Institute of Geodesy and Geoinformatcis
+  Institute of Geodesy and Geoinformatics
 }
 
 \begin{document}
@@ -171,7 +170,10 @@
     and then put all your bibliography there. Make sure to format bibliography
     according to \texttt{apa} rules.
 
-    The preferred and recommended method here is to use \texttt{bibtex}
+    The preferred and recommended method here is to use
+    \texttt{bibtex}\footnote{if you prefer using \texttt{biblatex+biber} is allowed,
+      in that case just add class option \texttt{biblatex} and use appropriate
+      cite command and run \texttt{biber} to process your citations instead of \texttt{bibtex}}
     tool. Within this method all formatting will be done automatically.
     See the attached \texttt{rgg\_sample\_article.bib} file.
     Make sure to run \texttt{bibtex} command after compiling you source
@@ -189,19 +191,30 @@
         command                                  & output                            \\
         \midrule
         \verb|\cite{Neitzel2010}|                & \cite{Neitzel2010}                \\
+        \verb|\cite{twoauthors}|                 & \cite{twoauthors}                 \\
+        \verb|\cite{multiplenames}|              & \cite{multiplenames}              \\
         \verb|\citeA{Neitzel2010,mastersthesis}| & \citeA{Neitzel2010,mastersthesis} \\
         \verb|\cite{book}|                       & \cite{book}                       \\
         \verb|\citeNP{phdthesis}|                & \citeNP{phdthesis}                \\
+        \verb|\citeNP{twoauthors}|               & \citeNP{twoauthors}               \\
+        \verb|\citeNP{multiplenames}|            & \citeNP{multiplenames}            \\
+        \verb|\citeA{moretheneight}|             & \citeA{moretheneight}             \\
+        \verb|\cite{moretheneight}|              & \cite{moretheneight}              \\
+        \verb|\cite{threenames}|                 & \cite{threenames}                 \\
+        \verb|\cite{proceedings}|                & \cite{proceedings}                \\
+        \verb|\citeA{proceedings}|               & \citeA{proceedings}               \\
+        \verb|\cite{inproceedings}|              & \cite{inproceedings}              \\
+        \verb|\citeA{inproceedings}|             & \citeA{inproceedings}             \\
         \bottomrule
       \end{tabular}
-    \end{table}
+      \end{table}
 
   \section{Closing remarks}
     The Author(s) are kindly requested to submit, with the manuscript, 
     the names, and e-mail addresses of five potential reviewers. Note 
     that the editor retains the sole right to decide whether or not the 
     suggested reviewers are used. The names of potential reviewers should 
-    be entered in the section Comments for the Editor in the 1St step of 
+    be entered in the section Comments for the Editor in the 1st step of 
     on-line submission process.
 
     The \texttt{rgg.cls} use some standard packages.
@@ -250,5 +263,7 @@
       (source of bibliography)}
     {\scriptsize\verbatiminput{rgg_sample_article.bib}}
 
+  \subsection*{Listing of \texttt{rgg.cls} file (journal \LaTeX{} class)}
+    {\scriptsize\verbatiminput{rgg.cls}}
 \end{document}
 

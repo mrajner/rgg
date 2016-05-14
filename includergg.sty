@@ -1,0 +1,155 @@
+%% this package is extension to rgg.cls
+%% to combine several papers into one volume
+%%
+%% no documentation -- read source files
+%% Marcin Rajner
+%% 2016.04.23
+
+\newcounter{inclusion}
+\newcounter{inclusionpages}
+\setcounter{inclusion}{0}
+
+\RequirePackage{tocloft}
+\tocloftpagestyle{empty}
+\newcommand{\listpapers}{\Large Contents}
+\newlistof{papers}{pap}{\listpapers}
+
+\renewcommand{\cftpapersleader}{ }
+
+\setlength{\cftbeforepapersskip}{1.7em}
+
+\usepackage{etoolbox}
+\RequirePackage{emptypage}
+\RequirePackage{standalone}
+\RequirePackage{pdfpages}
+
+\RequirePackage{xparse}
+
+\let\titleold=\title
+\let\authorold=\author
+
+
+\let\olddoi=\doi
+\renewcommand{\doi}[1]{%
+  \def\rgg@doi{\olddoi{#1}}
+}
+
+\renewcommand{\title}[2][\empty]{
+  \ifx#1\empty
+  \titleold{#2}
+  \else
+  \titleold[#1]{#2}
+  \fi
+  \def\thetitle{#2}
+}
+\renewcommand{\author}[2][\empty]{
+  \ifx#1\empty
+  \authorold{#2}
+  \else
+  \authorold[#1]{#2}
+  \fi
+  \def\theauthor{#2}
+}
+
+\def\addtopapers{%
+  \addcontentsline{pap}{papers}{
+    \hyphenpenalty=10000
+    \parbox[t]{0.8\linewidth}{
+      \ifdefined\thetitle
+      {\bfseries\thetitle}
+      \fi
+      \ifdefined\theauthor
+      \newline
+      \em\theauthor 
+      \fi
+    }
+  }
+}
+
+\let\maketitleold=\maketitle
+\renewcommand{\maketitle}{
+  \maketitleold
+  \addtopapers
+}
+
+\NewDocumentCommand{\includergg}{O{} m O{tex} O{\empty} O{} } {%
+  \setcounter{figure}{0}
+  \setcounter{table}{0}
+  \setcounter{section}{0}
+  \addtocounter{inclusion}{1}
+  \gdef\@keywords{}
+  \xdef\firstpage{\thepage}
+  \ifstrequal{#3}{pdf}{
+    \def\lastpage{\pageref{LastPage\theinclusion}}
+  }{%
+    \def\lastpage{\pageref{LastPage\theinclusion}}
+  }
+  \begin{refsection}[#2,#5]
+  \ifx#4\empty\else\doi{#4}\fi
+
+    \ifstrequal{#3}{pdf}{
+      \addtopapers
+      \setcounter{inclusionpages}{0}
+      \includepdf[
+        #1,
+        pages=-,
+        pagecommand={
+          \addtocounter{inclusionpages}{1}
+          \ifnum\theinclusionpages=1
+            \thispagestyle{empty}
+            \fboxrule=0.4pt 
+            \fboxsep=3pt
+            \titlepageheading
+          \fi
+          \ifnum\theinclusionpages=\the\pdflastximagepages
+            \label{LastPage\theinclusion}
+          \fi
+        }
+      ]
+      {#2}
+    }{%
+      \input{#2}
+      \label{LastPage\theinclusion}
+    }
+  \cleardoublepage
+  \end{refsection}
+}
+
+\def\makecolophon{%
+  \clearpage
+  \thispagestyle{empty}
+  \null\vfill
+  \noindent
+  \textbf{\rgg}\\
+  volume \rgg@volume, number \rgg@number, \rgg@year\\
+  \\
+  \textbf{Editor-in-Chief}\\
+  Marcin Barlik\\
+  \\
+  \textbf{Managing Editor}\\
+  Ryszard Szpunar\\
+  \\
+  \textbf{Editorial Board}\\
+  Jerzy Chmiel\\
+  Paweł Kowalski\\
+  Grzegorz Lenda\\
+  Tomasz Liwosz\\
+  Tomasz Olszak\\
+  Paweł Pędzich\\
+  Dorota Zawieska\\
+  \\
+  \textbf{Technical Editor}\\
+  Dominik Próchniewicz\\
+  \\
+  \url{http://www.reports.gik.pw.edu.pl}\\
+  \href{mailto:reports.geodesy@gmail.com}
+  {\texttt{reports.geodesy@gmail.com}}\\
+  \\
+  \textbf{Publisher}\\
+  DE GRUYTER OPEN\\
+  Bogumiła Zuga 32A Str.\\
+  01-811 Warsaw, Poland\\
+  \\
+  ISSN \rgg@ISSN
+  \clearpage%
+}
