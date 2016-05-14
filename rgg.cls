@@ -1,6 +1,6 @@
 %% This file is LaTeX class for submission
 %% to Reports on Geodesy and Geoinformatics
-
+$
 %% this class follows author guidelines specified at
 %% http://www.reports.gik.pw.edu.pl
 %% and mimic the official Word template
@@ -417,7 +417,8 @@
   \RequirePackage[apaciteclassic]{apacite}
 
   %% slightly modified APA style to meet `rgg` standard
-  %% i.e. give et al. if at least 3 authors (originall APA truncate names after 5 authors)
+  %% i.e. give et al. if at least 3 authors
+  %% (originall APA truncate names after 5 authors)
   \AtBeginDocument{%
     \let\cite=\shortcite
     \let\citeA=\shortciteA
