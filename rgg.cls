@@ -320,7 +320,7 @@
 
 %% Bibliography clickable doi
 \ifrgg@hyperref
-\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[hidelinks,pdfusetitle]{hyperref}
 \RequirePackage{doi}
 \renewcommand{\doitext}{}
 \fi
