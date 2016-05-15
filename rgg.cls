@@ -340,19 +340,21 @@
   \vskip5pt
   \leaders\vrule width 0.5\textwidth\vskip0.4pt
   \nointerlineskip
-  \vskip-5pt\nobreak
+  \vskip5pt\nobreak
 }
 %% authornote
 \RequirePackage{array,longtable}
 \newcommand{\authornote}[1]{%
   \thisfloatsetup{font=normalsize}
-  \pagebreak[2]
   \disappearingrule
-  \begin{longtable}
-    {@{}p{0.1\textwidth}@{\hskip1em}p{0.9\textwidth}@{}}
-    \textbf{Authors:} 
-    & \let\\\newline #1
-  \end{longtable}
+  {%
+    \parindent=0em
+    \leftskip=0.15\linewidth%}
+    \rlap{\textbf{Authors:}}
+    \vskip-\baselineskip
+    #1
+    \par
+  }
 }
 
 
