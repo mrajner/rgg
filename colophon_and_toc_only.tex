@@ -1,0 +1,50 @@
+% klasa ta sama co zawsze, żeby wszystkie czcionki były poprawne
+% www.grat.gik.pw.edu.pl/rgg/rgg.cls
+% reszta ustawień jest zrozumiała
+
+%! zawsze sprawdź wyniki -- stronicowanie itp.!
+
+\documentclass
+[
+  volume = 100,
+  number = 1,
+  year   = 2016,
+]
+{rgg}
+
+% ten pakiet jest potrzebny, tu jest definicja komendy \makecolophon 
+\usepackage{includergg}
+
+\begin{document}
+    % jak chcesz włączyć okładkę w~pliku pdf
+    % \includepdf{path_to_pdf_file}
+
+    \makecolophon
+
+    \listofpapers
+
+    \title{Towards reliable velocities of permanent GNSS stations}
+    \author{Janusz Bogusz,  Anna Klos,  Marta Gruszczynska,  Maciej Gruszczynski}
+    \addtopapers[43]
+
+    \title
+    {Implementation of satellite techniques in the air transport}
+    \author
+    {Andrzej Fellner, Henryk Jafernik}
+    \addtopapers[52]
+
+    \title{The problem of the instrument stabilization during hydrographic measurements}
+    \author{Andrzej Felski, Krzysztof Naus, Mariusz Wąż}
+    \addtopapers[1234]
+
+    \title
+    {Short-term and long-term variability of antenna position due to thermal bending of pillar monument at permanent GNSS station} 
+    \author{Lubomira Gerhatova, Jan Hefty, Peter Spanik}
+    \addtopapers
+
+    \title
+    {Theoretical and applied research in the field of higher geodesy conducted in Rzeszow}
+    \author{Roman Kadaj, Tomasz Świętoń}
+    \addtopapers[123456789]
+
+\end{document}

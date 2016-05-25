@@ -51,19 +51,25 @@
   \def\theauthor{#2}
 }
 
-\def\addtopapers{%
-  \addcontentsline{pap}{papers}{
-    \hyphenpenalty=10000
-    \parbox[t]{0.8\linewidth}{
-      \ifdefined\thetitle
+\def\mypapcontents{%
+  \hyphenpenalty=10000
+  \parbox[t]{0.8\linewidth}{
+    \ifdefined\thetitle
       {\bfseries\thetitle}
-      \fi
-      \ifdefined\theauthor
+    \fi
+    \ifdefined\theauthor
       \newline
       \em\theauthor 
-      \fi
-    }
+    \fi
   }
+}
+
+\NewDocumentCommand{\addtopapers}{ O{\empty} }{%
+  \ifx#1\empty
+    \addcontentsline{pap}{papers}{\mypapcontents}
+  \else
+    \contentsline {papers}{\mypapcontents}{#1}{Doc-Start}
+  \fi
 }
 
 \let\maketitleold=\maketitle
@@ -111,7 +117,7 @@
       \input{#2}
       \label{LastPage\theinclusion}
     }
-  \cleardoublepage
+    \cleardoublepage
   \end{refsection}
 }
 
