@@ -1,0 +1,119 @@
+% klasa ta sama co zawsze, żeby wszystkie czcionki były poprawne
+% www.grat.gik.pw.edu.pl/rgg/rgg.cls
+% reszta ustawień jest zrozumiała
+
+%! zawsze sprawdź wyniki -- stronicowanie itp.!
+
+\documentclass
+[
+  volume = 100,
+  number = 1,
+  year   = 2016,
+]
+{rgg}
+
+% ten pakiet jest potrzebny, tu jest definicja komendy \makecolophon 
+% www.grat.gik.pw.edu.pl/rgg/includergg.sty
+\usepackage{includergg}
+
+
+\begin{document}
+    % jak chcesz włączyć okładkę w~pliku pdf
+    \includepdf{pdf/okladka_RGG_100.pdf}
+
+    \makecolophon
+
+    {
+      \thispagestyle{empty}
+      \listofpapers
+      \thispagestyle{empty}
+    }
+    \cleardoublepage
+
+    \title{Towards reliable velocities of permanent GNSS stations}
+    \author{Janusz Bogusz,  Anna Klos,  Marta Gruszczynska,  Maciej Gruszczynski}
+    % \includergg{pdf/rgg-2016-0002.pdf}[pdf][10.2478/rgg-2016-0003]
+
+    \title
+    [A WebGIS framework for disseminating processed remotely sensed\ldots]
+    {A WebGIS framework for disseminating processed remotely sensed on land cover transformations}
+    \author[Caradonna, G. et al.]{Grazia Caradonna, Antonio Novelli, Eufemia Tarantino, Raffaela  Cefalo, Umberto Fratino}
+    \includergg{pdf/rgg-2016-0003.pdf}[pdf][10.2478/rgg-2016-0004]
+
+    \title
+    {Implementation of satellite techniques in the air transport}
+    \author[Fellner, A. Jafernik, H.]
+    {Andrzej Fellner, Henryk Jafernik}
+    \includergg{pdf/rgg-2016-0004.pdf}[pdf][10.2478/rgg-2016-0005]
+
+    \title{The problem of the instrument stabilization during hydrographic measurements}
+    \author[Felski, A. et al.]{Andrzej Felski, Krzysztof Naus, Mariusz Wąż}
+    \includergg{pdf/rgg-2016-0005.pdf}[pdf][10.2478/rgg-2016-0006]
+
+    \title
+    [Short-term and long-term variability of antenna position\ldots]
+    {Short-term and long-term variability of antenna position due to thermal bending of pillar monument at permanent GNSS station} 
+    \author[Gerhatova, L. et al.]{Lubomira Gerhatova, Jan Hefty, Peter Spanik}
+    \doi{10.2478/rgg-2016-0005}
+    \includergg{pdf/rgg-2016-0006.pdf}[pdf][10.2478/rgg-2016-0007]
+
+    \title
+    [Theoretical and applied research in the field of higher geodesy\ldots]
+    {Theoretical and applied research in the field of higher geodesy conducted in Rzeszow}
+    \doi{10.2478/rgg-2016-0006}
+    \author[Kadaj, R., Świętoń, T.]{Roman Kadaj, Tomasz Świętoń}
+    \includergg{pdf/rgg-2016-0007.pdf}[pdf][10.2478/rgg-2016-0008]
+
+    {
+      \bibtextobiblatex
+      \includergg{10_lat_gnss}[][10.2478/rgg-2016-0009]
+    }
+
+    \title[Laser scanning in engineering surveying\ldots]{Laser scanning in engineering surveying: methods of measurement and modeling of structures}
+    \author[Lenda, G. et al.]{Grzegorz Lenda, Andrzej Uznański Michał Strach, Paulina Lewińska} 
+    \includergg{pdf/rgg-2016-0009.pdf}[pdf][10.2478/rgg-2016-0010]
+
+    \title{Geodynamic research at the Department of Planetary geodesy, SRC PAS}
+    \author
+    [Brzeziński, A.~et al.]
+    {Aleksander Brzeziński, Mieczysław Jóźwik, Marek Kaczorowski,
+      Maciej Kalarus, Damian Kasza, Wiesław Kosek, Jolanta Nastula,
+      Zbigniew Szczerbowski, Małgorzata Wińska, Roman Wronowski,
+      Ryszard Zdunek, Janusz B. Zieliński}
+    \includergg{pdf/rgg-2016-0010.pdf}[pdf][10.2478/rgg-2016-0011]
+
+    \title
+    [Complex geodetic research in\ldots\emph{Academician Vernadsky}]
+    {Complex geodetic research in Ukrainian Antarctic Station \emph{Academician Vernadsky} (YEARS 2002 - 2005, 2013-2014)}
+    \author[Tretyak, K.~et al.]{Kornyliy Tretyak, Volodymyr Hlotov, Yuriy Holubinka, Khrystyna Marusazh}
+    \includergg{pdf/rgg-2016-0011.pdf}[pdf][10.2478/rgg-2016-0012]
+
+    \includergg{kgiag}[][10.2478/rgg-2016-0013][Earth_rotation.bib,mr.bib,DP_RGG100.bib]
+
+    \title
+    [Research and development work\ldots]
+    {Research and development work carried out by the Chair of Engineering 
+      Geodesy and Measurement and Control Systems, Faculty of Geodesy and 
+      Cartography WUT – thematic scope and achievements}
+    \author[Nowak, E.~et al.]{
+      Edward Nowak, Ryszard Malarski, Witold Prószyński,
+      Alicja Sadowska, Marek Woźniak, Janina Zaczek-Peplinska}
+    \includergg{pdf/rgg-2016-0013.pdf}[pdf][10.2478/rgg-2016-0014]
+
+    \title
+    [Photogrammetry at the WUT --- past and present]
+    {Photogrammetry at the Warsaw University of Technology --- past and present}
+    \author[Zawieska, D., Kurczyński, Z.]{Dorota Zawieska, Zdzisław Kurczyński}
+    \includergg{pdf/rgg-2016-0014.pdf}[pdf][10.2478/rgg-2016-0015]
+
+    \title
+    [Participation of employees and students\ldots in polar research]
+    {Participation of employees and students of the Faculty of Geodesy and Cartography in polar research}
+    \author
+    [Pasik, M.~et al.]
+    {%
+      Mariusz Pasik, Artur Adamek, Marcin Rajner, Zdzisław Kurczyński,
+      Andrzej Pachuta, Marek Woźniak, Paweł Bylina, Dominik Próchniewicz
+    }
+    \includergg{pdf/rgg-2016-0015.pdf}[pdf][10.2478/rgg-2016-0016]
+\end{document}
