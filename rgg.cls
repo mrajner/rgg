@@ -404,7 +404,7 @@
   %% they where given by authors
   \DeclareFieldFormat{titlecase}{%
     % \MakeSentenceCase{#1}
-    #1
+    {#1}
   }
   \DeclareFieldFormat{apacase}{%
     {#1}
