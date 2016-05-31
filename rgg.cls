@@ -352,7 +352,7 @@
     \leftskip=0.15\linewidth%}
     \rlap{\textbf{Authors:}}
     \vskip-\baselineskip
-    #1
+    {#1}
     \par
   }
 }
