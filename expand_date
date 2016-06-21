@@ -5,6 +5,7 @@ if ARGV[0] == 'reverse'
   puts data
   .gsub(/%% Date:.*/   , '%% $Date$')
   .gsub(/%% Version:.*/   , '%% $Version$')
+
 else
   data = STDIN.read
   last_date = `git log --pretty=format:"%ai" -1`
