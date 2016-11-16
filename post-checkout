@@ -10,5 +10,9 @@ cecho 2 "From log:     $(git log -1 --pretty=format:"%ai")"
 cecho 2 "From rgg.cls: $(grep -w Date rgg.cls |sed 's/%%.Date:\s*//')"
 echo
 
-cecho 3 "From log:     $(git log -1 --pretty=format:"%ai")"
+cecho 3 "From log:     $(git describe --tag)"
 cecho 3 "From rgg.cls: $(grep -w Version rgg.cls |sed 's/%%.Version:\s*//')"
+echo
+
+cecho 4 "From log:     $(git log -1 --pretty=format:"%ai")"
+cecho 4 "From rgg.cls: $(grep  ProvideClass rgg.cls|sed 's/%%.Version:\s*//')"

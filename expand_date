@@ -5,9 +5,10 @@ require "time"
 if ARGV[0] == 'reverse'
   data = STDIN.read
   puts data
-  .gsub(/%% Date:.*/   , '%% $Date$')
-  .gsub(/%% Version:.*/   , '%% $Version$')
-  .gsub(/%% Version:.*/   , '%% $Version$')
+    .gsub(/%% Date:.*/   , '%% $Date$')
+    .gsub(/%% Version:.*/   , '%% $Version$')
+    .gsub(/%% Version:.*/   , '%% $Version$')
+    .gsub(/\ProvidesClass{rgg}.*/ , "\ProvidesClass{rgg}[$ProvideClassDate]")
 
 else
   data = STDIN.read
@@ -16,7 +17,7 @@ else
   provideclassdate = Time.parse(last_date).strftime("%Y/%m/%d")
 
   puts data
-  .gsub('$Date$'   , 'Date:    ' + last_date.to_s.chomp)
-  .gsub('$Version$', 'Version: ' + version.to_s.chomp)
-  .gsub('\ProvidesClass{rgg}[$ProvideClassDate$]' , "\ProvidesClass{rgg}[#{provideclassdate}]")
+    .gsub('$Date$'   , 'Date:    ' + last_date.to_s.chomp)
+    .gsub('$Version$', 'Version: ' + version.to_s.chomp)
+    .gsub('\ProvidesClass{rgg}[$ProvideClassDate$]' , "\ProvidesClass{rgg}[#{provideclassdate}]")
 end
