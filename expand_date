@@ -8,7 +8,7 @@ if ARGV[0] == 'reverse'
     .gsub(/%% Date:.*/   , '%% $Date$')
     .gsub(/%% Version:.*/   , '%% $Version$')
     .gsub(/%% Version:.*/   , '%% $Version$')
-    .gsub(/\\ProvidesClass{rgg}.*/ , "\ProvidesClass{rgg}[$ProvidesClassDate$]")
+    .gsub(/\\ProvidesClass{rgg}.*/ , "\\ProvidesClass{rgg}[$ProvidesClassDate$]")
 
 else
 
