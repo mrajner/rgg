@@ -25,7 +25,7 @@
 %% $Date$
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rgg}[2016/01/24]
+\ProvidesClass{rgg}[$ProvideClassDate$]
 
 %% use standard article rules by default
 %% with 12 point font size
