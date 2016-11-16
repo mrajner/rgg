@@ -1,13 +1,13 @@
 #!/bin/bash
 
 tmpfile=$(mktemp)
-./expand_date reverse < rgg.cls | ./expand_date > $tmpfile && cat $tmpfile > rgg.cls
+# ./expand_date reverse < rgg.cls | ./expand_date > $tmpfile && cat $tmpfile > rgg.cls
 
 cecho 210 updating \$Version\$, \$Date\$ and \$ProvideClassDate\$ in rgg.cls
+echo
 
 cecho 2 "From log:     $(git log -1 --pretty=format:"%ai")"
 cecho 2 "From rgg.cls: $(grep -w Date rgg.cls |sed 's/%%.Date:\s*//')"
-
 echo
 
 cecho 3 "From log:     $(git log -1 --pretty=format:"%ai")"

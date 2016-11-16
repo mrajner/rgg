@@ -1,17 +1,22 @@
 #!/usr/local/bin/ruby
 
+require "time"
+
 if ARGV[0] == 'reverse'
   data = STDIN.read
   puts data
   .gsub(/%% Date:.*/   , '%% $Date$')
+  .gsub(/%% Version:.*/   , '%% $Version$')
   .gsub(/%% Version:.*/   , '%% $Version$')
 
 else
   data = STDIN.read
   last_date = `git log --pretty=format:"%ai" -1`
   version   = `git describe --tags`
+  provideclassdate = Time.parse(last_date).strftime("%Y/%m/%d")
 
   puts data
   .gsub('$Date$'   , 'Date:    ' + last_date.to_s.chomp)
   .gsub('$Version$', 'Version: ' + version.to_s.chomp)
+  .gsub('\ProvidesClass{rgg}[$ProvideClassDate$]' , "\ProvidesClass{rgg}[#{provideclassdate}]")
 end
