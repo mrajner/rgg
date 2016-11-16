@@ -3,6 +3,7 @@
 require "time"
 
 if ARGV[0] == 'reverse'
+
   data = STDIN.read
   puts data
     .gsub(/%% Date:.*/   , '%% $Date$')
