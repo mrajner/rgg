@@ -1,7 +1,7 @@
 #!/bin/bash
 
 tmpfile=$(mktemp)
-# ./expand_date reverse < rgg.cls | ./expand_date > $tmpfile && cat $tmpfile > rgg.cls
+./expand_date reverse < rgg.cls | ./expand_date > $tmpfile && cat $tmpfile > rgg.cls
 
 cecho 210 updating \$Version\$, \$Date\$ and \$ProvideClassDate\$ in rgg.cls
 echo
