@@ -179,7 +179,6 @@
 %% smaller font for tables
 \floatsetup[table]{font=small}
 
-
 \RequirePackage{caption}
 \captionsetup
 {
@@ -283,7 +282,6 @@
 }
 \def\doiheader{\textsc{doi:}\rgg@doi}
 
-
 %%%%%%%%%% TODO: DISCUSS WITH EDITORS %%%%%%%%%%%%%%%%
 % \RequirePackage{changepage}
 % \strictpagecheck
@@ -356,7 +354,6 @@
     \par
   }
 }
-
 
 %% remove unnecessary space in lists
 \usepackage{enumitem}
