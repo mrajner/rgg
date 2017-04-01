@@ -15,17 +15,18 @@
 %% or you need any fancy setting which cannot be achieved
 %% without touching this class file
 %% please contact mrajner@gik.pw.edu.pl
+%% or marcin.rajner@pw.edu.pl
 
 %% up to date and development version of rgg.cls file
 %% can be found on 
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
 %% Created: 2015-11-16 by Marcin Rajner
-%% $Version$
-%% $Date$
+%% Version: v1.2-12-g7fc5fa8
+%% Date:    2016-11-20 22:37:44 +0100
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rgg}[$ProvidesClassDate$]
+\ProvidesClass{rgg}[2016/11/20]
 
 %% use standard article rules by default
 %% with 12 point font size
@@ -415,7 +416,7 @@
   %% force using apa style for bibliography
   \RequirePackage[apaciteclassic]{apacite}
 
-  %% slightly modified APA style to meet `rgg` standard
+  %% slightly modified APA style to meet `rgg` standards
   %% i.e. give et al. if at least 3 authors
   %% (originall APA truncate names after 5 authors)
   \AtBeginDocument{%
