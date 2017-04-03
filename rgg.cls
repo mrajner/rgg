@@ -22,11 +22,11 @@
 %% http://www.grat.gik.pw.edu.pl/rgg/
 
 %% Created: 2015-11-16 by Marcin Rajner
-%% Version: v1.2-12-g7fc5fa8
-%% Date:    2016-11-20 22:37:44 +0100
+%% $Version$
+%% $Date$
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{rgg}[2016/11/20]
+\ProvidesClass{rgg}[$ProvidesClassDate$]
 
 %% use standard article rules by default
 %% with 12 point font size
