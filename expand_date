@@ -2,9 +2,10 @@
 
 require "time"
 
+data = STDIN.read
+
 if ARGV[0] == 'reverse'
 
-  data = STDIN.read
   puts data
     .gsub(/%% Date:.*/   , '%% $Date$')
     .gsub(/%% Version:.*/   , '%% $Version$')
@@ -13,7 +14,6 @@ if ARGV[0] == 'reverse'
 
 else
 
-  data = STDIN.read
   last_date = `git log --pretty=format:"%ai" -1`
   version   = `git describe --tags`
   providesclassdate = Time.parse(last_date).strftime("%Y/%m/%d")
