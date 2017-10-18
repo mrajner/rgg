@@ -27,6 +27,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{rgg}[$ProvidesClassDate$]
+\def\rggversion{$Version$}
 
 %% use standard article rules by default
 %% with 12 point font size
