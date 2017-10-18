@@ -15,7 +15,7 @@ authordep :=                     \
 package: rgg-latex-guide-for-author-latest.tar.gz
 
 rgg-latex-guide-for-author-latest.tar.gz: $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz
-	ln -sf $< $@
+	ln -f $< $@
 
 $(ARCHDIR):
 	mkdir -p $@
