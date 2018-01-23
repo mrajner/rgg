@@ -57,8 +57,7 @@ test:
 		&& zathura rgg_sample_article.pdf rgg_editor.pdf
 
 VERSION.txt: $(authordep) Makefile
-	echo This is version $$(git describe --tags \
-		| sed -e 's/-g.*//' -e  's/-/./') [$$(git show -s --format=%ci HEAD)] of LaTeX class for Reports on Geodesy and Geoinformatics -- rgg.cls > $@
+	echo This is version $$(git describe --tags) [$$(git show -s --format=%ci HEAD)] of LaTeX class for *Reports on Geodesy and Geoinformatics* journal -- rgg.cls > $@
 
 changes.txt: rgg.cls
 	git log -p --no-color -- rgg.cls > $@
