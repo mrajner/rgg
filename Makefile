@@ -6,10 +6,11 @@ ARCHDIR := archive
 all: package rgg_editor.pdf changes.txt VERSION.txt
 	@tput setaf 2 ; echo rgg.cls $(VERSION).$(COMMITS) ; tput sgr0
 
-authordep :=                     \
-	rgg.cls rgg_sample_article.bib \
-	rgg_sample_article.tex         \
-	rgg_sample_article.pdf         \
+authordep :=             \
+	rgg.cls                \
+	rgg_sample_article.bib \
+	rgg_sample_article.tex \
+	rgg_sample_article.pdf \
 	figure.pdf
 
 package: rgg-latex-guide-for-author-latest.tar.gz
@@ -21,7 +22,7 @@ $(ARCHDIR):
 	mkdir -p $@
 
 $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
-	tar -czf $@  $(addprefix ../$(DIR)/,$(authordep))
+	[[ -z $$(git status --porcelain) ]] && tar -czf $@  $(addprefix ../$(DIR)/,$(authordep)) || { tput setaf 1 ; echo working directory not clean, refusing creating archive ; tput sgr0 ; false ; }
 
 clean:
 	git clean -fx
