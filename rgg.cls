@@ -136,41 +136,37 @@
 \hrule height 0.4pt
 \thispagestyle{plain}%
 \else
-  \thispagestyle{empty}%
-  \hbox to \textwidth{\phantom{\headerfirstpage\hfill\doiheader}}
-  \kern 2.4pt
+	\thispagestyle{empty}%
+	\hbox to \textwidth{\phantom{\headerfirstpage\hfill\doiheader}}
+	\kern 2.4pt
 \fi
-% }
-  \par
-  \vskip5em
-  \raisebox{0pt}[0pt][0pt]{
-    \ifdefined\arttype
-      % \fcolorbox{white}{black}{
-      %   \textcolor{white}{\arttype}
-      % }
-    \fbox{\arttype}
-    \fi
-  }
-  \vskip1em
+	\par
+	\vskip5em
+	\raisebox{0pt}[0pt][0pt]{
+		\ifdefined\arttype
+		\fbox{\arttype}
+		\fi
+	}
+	\vskip1em
 }
 
 %% maketitle command style
 \renewcommand\maketitle{
-  \titlepageheading
-  % \parbox{14cm}{%
-    %% title bold and centred and all in upper case
-    \begin{center}
-      {\bfseries\large\MakeUppercase{\@title}\par}
-    \end{center}
-    % }
-  \begin{center}
-    {\bfseries\@author}\\
-    \vspace*{0.5em}
-    {\@affiliation}
-  \end{center}
+	\titlepageheading
+	% \parbox{14cm}{%
+		%% title bold and centred and all in upper case
+		\begin{center}
+			{\bfseries\large\MakeUppercase{\@title}\par}
+		\end{center}
+		% }
+	\begin{center}
+		{\bfseries\@author}\\
+		\vspace*{0.5em}
+		{\@affiliation}
+	\end{center}
 
-  %% no floats on title page
-  \suppressfloats
+	%% no floats on title page
+	\suppressfloats
 }
 
 %% float environments
@@ -308,11 +304,6 @@
   \fancyhead{}
 }
 
-% \else
-  % \fancyhead[LO]{\headerfirstpage}
-  % \fancyhead[RO]{\doiheader}
-  % \fi
-
 \else
   \renewcommand{\headrulewidth}{0.0pt}
   \renewcommand{\footrulewidth}{0.0pt}
@@ -342,6 +333,7 @@
   \nointerlineskip
   \vskip5pt\nobreak
 }
+
 %% authornote
 \RequirePackage{array,longtable}
 \newcommand{\authornote}[1]{%
@@ -361,9 +353,6 @@
 \usepackage{enumitem}
 \setlist{nosep}
 
-% widows and clubs
-% \widowpenalty10000
-% \clubpenalty10000
 \usepackage[all]{nowidow}
 
 %% avoid unnecessary float pages 
@@ -402,7 +391,6 @@
   %% keep title captialics in bibliography as 
   %% they where given by authors
   \DeclareFieldFormat{titlecase}{%
-    % \MakeSentenceCase{#1}
     {#1}
   }
   \DeclareFieldFormat{apacase}{%
