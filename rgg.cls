@@ -54,7 +54,9 @@
 \DeclareStringOption[1]{number}
 \DeclareStringOption[]{doi}
 \DeclareStringOption[]{year}
-\DeclareStringOption[\empty]{type}
+\DeclareStringOption[]{type}
+\DeclareStringOption[]{received}
+\DeclareStringOption[]{accepted}
 \DeclareBoolOption{review}
 \DeclareBoolOption[false]{logodg}
 \DeclareBoolOption[false]{biblatex}
@@ -141,13 +143,25 @@
 	\kern 2.4pt
 \fi
 	\par
-	\vskip5em
-	\raisebox{0pt}[0pt][0pt]{
-		\ifdefined\arttype
+	\vskip4em
+	\noindent\raisebox{0pt}[0pt][0pt]{%
+		%% arttype takes precedence over `type` option
+		%% and is obsolete method provided for 
+		%% backward compatibility
+		\ifdefined\arttype%
 		\fbox{\arttype}
+		\else
+			\ifx\rgg@type\empty\else
+			\fbox{\vphantom{}\rgg@type}
+			\fi
 		\fi
+	}\par
+	\noindent{\small%
+	Received: \rgg@received
+	/
+	Accepted: \rgg@accepted
 	}
-	\vskip1em
+	\vskip1.5em
 }
 
 %% maketitle command style

@@ -1,29 +1,40 @@
 %% this is part of rgg latex class
 %% not intended to be distributed to authors
-%% 
+%%
 %% this file show how to set important value when preparing print-ready
 %% version of article by editor
-%%  
-%% just set all important values as in example in this
-%% and run (pdf)latex command on this file 
-%% you do not need to change the original submitted file
 %%
+%% just set all important values as in this example 
+%% and run (pdf)latex command on this file 
+%%
+%% you do not need to change the original submitted file
+%% which can be sourced (\input{...})
 %% or just simply set this value in the submitted tex source file
 %% like below:
-%% \documentclass[ 
-%% startpage = 10,
-%% ...,
-%% ]{rgg}
+%%    \documentclass[
+%%    startpage = 10,
+%%    ...,
+%%    ]{rgg}
 
 \PassOptionsToClass{
   % select the number of starting page, volume, year and doi
-  % if logodg argument is present than deGruyter logo is printed at first page
+  % if logodg argument is present (or `logodg = true`) than deGruyter 
+  % logo is printed at first page
+  %
+  % due to parsing of global options if strings contain
+  % spaces, they should be embraced with double curly braces
+  % like in example for type below
+  %
+  % if review is set (`review = true`) than the version for reviewers
+  % is generated
   startpage = 11,
   volume    = 123,
   year      = 2015,
   doi       = 152.rgg/abcd,
   review    = false,
-  type      = {Reviev article},
+  type      = {{Reviev article}},
+  received  = {{1 February 2018}},
+  accepted  = {{6 June 2018}},
   logodg,
 }{rgg}
 
