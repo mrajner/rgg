@@ -21,7 +21,7 @@ rgg-latex-guide-for-author-latest.tar.gz: $(ARCHDIR)/rgg-latex-guide-for-author-
 $(ARCHDIR):
 	mkdir -p $@
 
-$(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
+$(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt changes.txt $(ARCHDIR)
 	[[ -z $$(git status --porcelain) ]] && tar -czf $@  $(authordep) || { tput setaf 1 ; echo working directory not clean, refusing creating archive ; tput sgr0 ; false ; }
 
 clean:
@@ -61,7 +61,7 @@ VERSION.txt: $(authordep) Makefile
 	echo This is version $$(git describe --tags) [$$(git show -s --format=%ci HEAD)] of LaTeX class for *Reports on Geodesy and Geoinformatics* journal -- rgg.cls > $@
 
 changes.txt: rgg.cls
-	git log -p --no-color -- rgg.cls > $@
+	git log -p --no-color --no-use-mailmap -- rgg.cls > $@
 
 cleanarchive:
 	echo $(VERSION)
