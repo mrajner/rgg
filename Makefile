@@ -22,7 +22,7 @@ $(ARCHDIR):
 	mkdir -p $@
 
 $(ARCHDIR)/rgg-latex-guide-for-author-$(VERSION).$(COMMITS).tar.gz: $(authordep) VERSION.txt $(ARCHDIR)
-	[[ -z $$(git status --porcelain) ]] && tar -czf $@  $(addprefix ../$(DIR)/,$(authordep)) || { tput setaf 1 ; echo working directory not clean, refusing creating archive ; tput sgr0 ; false ; }
+	[[ -z $$(git status --porcelain) ]] && tar -czf $@  $(authordep) || { tput setaf 1 ; echo working directory not clean, refusing creating archive ; tput sgr0 ; false ; }
 
 clean:
 	git clean -fx
