@@ -14,8 +14,9 @@
 %% or other technical issues
 %% or you need any fancy setting which cannot be achieved
 %% without touching this class file
-%% please contact mrajner@gik.pw.edu.pl
-%% or marcin.rajner@pw.edu.pl
+%% please contact
+%% marcin.rajner@pw.edu.pl or
+%% marcin.rajner@chalmers.se
 
 %% up to date and development version of rgg.cls file
 %% can be found on 
